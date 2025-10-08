@@ -1,0 +1,44 @@
+.delete_modal {
+    font-family: Outfit, sans-serif;
+    width: 23.0625rem;
+    height: 13.125rem;
+    border-radius: 1.25rem;
+    border: 2px solid #d1d1d7;
+    background: #fdfcfa;
+    color: #1e1e24;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.delete_text {
+    text-align: center;
+}
+
+.delete_title {
+    font-size: 1.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 4rem;
+    margin-bottom: 0;
+}
+
+.delete_desc {
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+.delete_buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-top: 0;
+    margin-bottom: 4rem;
+}
