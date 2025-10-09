@@ -1,0 +1,76 @@
+.planCard {
+  display: flexbox;
+  background-color: #fdfcfa;
+  border: 2px solid #d1d1d7;
+  border-radius: 19px;
+  width: 370px;
+  height: 184px;
+  margin: 0;
+  position: relative;
+
+  h3 {
+    font-size: 25px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.textContents {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+
+.dynamicContents {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  img {
+    display: inline-flex;
+    flex: auto;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    margin: 2.5px;
+  }
+}
+
+.detailsSection {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.checkBox {
+  width: 31px;
+  height: 31px;
+  border-radius: 6px;
+  border: 1px solid #58585d;
+  background-color: #f7f4f0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.seeDetailsButton {
+  color: #58585d;
+  background: none;
+  border: none;
+  font-size: 13px;
+}

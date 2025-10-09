@@ -1,0 +1,56 @@
+.planShareModal {
+  width: 370px;
+  height: 168px;
+  background: #f7f4f0;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+
+  .close {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+}
+
+.contents {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  flex: auto;
+  gap: 45px;
+
+  p {
+    color: #4062bb;
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 10px;
+  }
+
+  .share {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      width: 35px;
+      height: 35px;
+    }
+  }
+
+  .export {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      width: 35px;
+      height: 35px;
+    }
+  }
+}
