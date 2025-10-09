@@ -1,0 +1,31 @@
+.inputContainer {
+    width: 330px;
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    color: #58585D;
+    font-size: var(--input-label-size, 25px);
+    font-weight: 700;
+}
+
+.input {
+    width: 95%;
+    display: block;
+    margin: 8px auto;
+    border: none;
+    border-bottom: 1px solid #1E1E24;
+    font-size: 16px;
+    background: transparent;
+}
+
+.inputWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.dollarSign {
+    font-size: 16px;
+    color: #1E1E24;
+}
