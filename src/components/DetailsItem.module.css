@@ -1,4 +1,4 @@
-.inputContainer {
+.itemContainer {
   width: 330px;
   margin-bottom: 20px;
 }
@@ -10,22 +10,14 @@
   font-weight: 700;
 }
 
-.input {
+.content {
   width: 95%;
-  display: block;
   margin: 8px auto;
   border: none;
   border-bottom: 1px solid #1e1e24;
   font-size: 16px;
+  padding: 0 5px 3px 5px;
   background: transparent;
-}
-
-.inputWrapper {
-  display: flex;
-  align-items: center;
-}
-
-.dollarSign {
-  font-size: 16px;
-  color: #1e1e24;
+  color: #4062bb;
+  font-weight: 500;
 }
