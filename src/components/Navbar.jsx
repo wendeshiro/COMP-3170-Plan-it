@@ -15,6 +15,7 @@ export default function Navbar({ navTitle }) {
       <div className="nav-item-middle">
         <h3>{navTitle}</h3>
       </div>
+      {/*Note: Title will need to read the current page name and alter accordingly*/}
 
       <div className="nav-item-right">
         <button onClick={console.log("Edit button clicked")}>
@@ -24,6 +25,8 @@ export default function Navbar({ navTitle }) {
           <img src={shareIcon} alt="share-btn" width={20} height={20} />
         </button>
       </div>
+
+      {/*Note: Buttons will need to become showable props for later toggleable page use. Also will need a link value. Maybe a visual hover indicator other than just cursor?*/}
     </nav>
   );
 }
