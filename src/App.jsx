@@ -6,15 +6,15 @@ import PlanCard from "./components/PlanCard";
 import PlanShareModal from "./components/PlanShareModal";
 import Input from "./components/Input";
 import InputCard from "./components/InputCard";
-import Navbar from "./components/Navbar";
 import DayPlanCard from "./components/DayPlanCard";
 import DayPlanCardEvent from "./components/DayPlanCardEvent";
 import DetailsItem from "./components/DetailsItem";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <div>
-      <Navbar navTitle={"Test Navbar"} />
+      <Navbar navTitle="Test Navbar"></Navbar>
       <Button redSmall>Delete</Button>
       <Button redLarge>Delete</Button>
       <Button whiteSmall>Cancel</Button>
