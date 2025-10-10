@@ -1,0 +1,23 @@
+.itemContainer {
+  width: 330px;
+  margin-bottom: 20px;
+}
+
+.label {
+  display: block;
+  color: #58585d;
+  font-size: var(--input-label-size, 25px);
+  font-weight: 700;
+}
+
+.content {
+  width: 95%;
+  margin: 8px auto;
+  border: none;
+  border-bottom: 1px solid #1e1e24;
+  font-size: 16px;
+  padding: 0 5px 3px 5px;
+  background: transparent;
+  color: #4062bb;
+  font-weight: 500;
+}

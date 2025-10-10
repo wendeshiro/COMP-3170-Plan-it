@@ -8,6 +8,7 @@ import Input from "./components/input";
 import InputCard from "./components/InputCard";
 import DayPlanCard from "./components/DayPlanCard";
 import DayPlanCardEvent from "./components/DayPlanCardEvent";
+import DetailsItem from "./components/DetailsItem";
 
 function App() {
   return (
@@ -34,10 +35,10 @@ function App() {
         showAddButton={false}
         style={{ "--input-label-size": "20px" }}
       >
-        <Input title="Date" type="date" />
-        <Input title="Destination" type="text" />
-        <Input title="Budget in currency" type="number" showDollar={true} />
-        <Input title="Members" />
+        <DetailsItem title="Date" content="2025/10/04 - 2025/10/14" />
+        <DetailsItem title="Destination" content="South Korea" />
+        <DetailsItem title="Budget in currency" content="$4000" />
+        <DetailsItem title="Members" content="wende, jisoo, yejin, sam" />
       </InputCard>
       <DayPlanCard cardTitle="Day 01 - Oct 3rd, 4th" weatherIcon="☀️" weather="Sunny 16°C / 11°C">
         <DayPlanCardEvent
