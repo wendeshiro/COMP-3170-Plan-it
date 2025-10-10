@@ -4,15 +4,17 @@ import { Button } from "./components/Button";
 import CreatePlanButton from "./components/AddPlan";
 import PlanCard from "./components/PlanCard";
 import PlanShareModal from "./components/PlanShareModal";
-import Input from "./components/input";
+import Input from "./components/Input";
 import InputCard from "./components/InputCard";
 import DayPlanCard from "./components/DayPlanCard";
 import DayPlanCardEvent from "./components/DayPlanCardEvent";
 import DetailsItem from "./components/DetailsItem";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <div>
+      <Navbar navTitle="Test Navbar"></Navbar>
       <Button redSmall>Delete</Button>
       <Button redLarge>Delete</Button>
       <Button whiteSmall>Cancel</Button>
@@ -40,7 +42,11 @@ function App() {
         <DetailsItem title="Budget in currency" content="$4000" />
         <DetailsItem title="Members" content="wende, jisoo, yejin, sam" />
       </InputCard>
-      <DayPlanCard cardTitle="Day 01 - Oct 3rd, 4th" weatherIcon="☀️" weather="Sunny 16°C / 11°C">
+      <DayPlanCard
+        cardTitle="Day 01 - Oct 3rd, 4th"
+        weatherIcon="☀️"
+        weather="Sunny 16°C / 11°C"
+      >
         <DayPlanCardEvent
           date="2025/10/03"
           time="7:20"
@@ -48,7 +54,12 @@ function App() {
           event="Vancouver airport"
           note="Double-check visa!"
         />
-        <DayPlanCardEvent date="2025/10/04" time="18:00" timeZone="KST" event="Incheon airport" />
+        <DayPlanCardEvent
+          date="2025/10/04"
+          time="18:00"
+          timeZone="KST"
+          event="Incheon airport"
+        />
         <DayPlanCardEvent
           date="2025/10/04"
           time="20:00"
@@ -57,7 +68,11 @@ function App() {
           note="Lotte Hotel in Hongdae"
         />
       </DayPlanCard>
-      <DayPlanCard cardTitle="Day 02 - Oct 5th" weatherIcon="⛅️" weather="Cloudy 18°C / 9°C">
+      <DayPlanCard
+        cardTitle="Day 02 - Oct 5th"
+        weatherIcon="⛅️"
+        weather="Cloudy 18°C / 9°C"
+      >
         <DayPlanCardEvent
           time="8:00"
           timeZone="KST"

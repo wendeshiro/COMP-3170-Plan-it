@@ -7,7 +7,9 @@ function toCamelCase(str) {
   const parts = cleaned.split(/\s+/);
   return parts
     .map((p, i) =>
-      i === 0 ? p.toLowerCase() : p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()
+      i === 0
+        ? p.toLowerCase()
+        : p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()
     )
     .join("");
 }
