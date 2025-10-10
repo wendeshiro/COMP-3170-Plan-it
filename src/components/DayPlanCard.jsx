@@ -1,11 +1,15 @@
-import styles from "./DayPlanCard.module";
+import styles from "./DayPlanCard.module.css";
 
-export default function DayPlanCard({ cardTitle }) {
-    return (
-        <div className={styles.dayPlanCardContainer}>
-            <div>
-                <p className={styles.cardTitle}>{cardTitle}</p>
-            </div>
-        </div>
-    );
+export default function DayPlanCard({ cardTitle, weatherIcon, weather, children }) {
+  return (
+    <div className={styles.dayPlanCardContainer}>
+      <div>
+        <p className={styles.cardTitle}>{cardTitle}</p>
+        <p className={styles.weather}>
+          {weatherIcon} {weather}
+        </p>
+        {children}
+      </div>
+    </div>
+  );
 }
