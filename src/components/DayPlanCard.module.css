@@ -1,19 +1,21 @@
 .dayPlanCardContainer {
-    background-color: #F7F4F0;
-    border-radius: 30px;
-    width: 370px;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 25px;
+  background-color: #f7f4f0;
+  border-radius: 30px;
+  width: 370px;
+  height: auto;
+  padding: 25px;
 }
 
 .cardTitle {
-    color: black;
-    font-size: 31px;
-    font-weight: 700;
-    align-self: flex-start;
-    margin-bottom: 15px;
+  color: black;
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.weather {
+  color: #4062bb;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
