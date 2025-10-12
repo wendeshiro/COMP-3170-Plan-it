@@ -1,0 +1,60 @@
+.upcoming-plan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+  justify-content: center;
+  width: 402px;
+  height: 874px;
+  background-color: #fdfcfa;
+}
+
+.plan-it-logo {
+  padding-bottom: 2rem;
+}
+
+.select-btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 0;
+}
+
+.select-btn-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #1e1e24;
+}
+
+.plan-cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 402px;
+  padding-top: 0.5rem;
+  padding-bottom: 0;
+}
+
+.plan-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-plan-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
