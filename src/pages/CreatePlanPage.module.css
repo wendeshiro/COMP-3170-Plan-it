@@ -1,0 +1,27 @@
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.topFormContainer {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.dayCardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 20px;
+}
+
+.btnContainer {
+  min-width: 370px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+}
