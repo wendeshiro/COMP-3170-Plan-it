@@ -1,14 +1,8 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import CreatePlanPage from "./pages/CreatePlanPage";
-
 function App() {
-  return (
-    <div>
-      <CreatePlanPage />
-    </div>
-  );
+  return <div></div>;
 }
 
 export default App;
