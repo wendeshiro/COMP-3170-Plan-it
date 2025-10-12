@@ -5,7 +5,7 @@ import styles from "./Dropdown.module.css";
 
 export default function BasicExample() {
   return (
-    <Dropdown className={styles.wrapper}>
+    <Dropdown>
       <Dropdown.Toggle className={styles.toggle}>Dropdown</Dropdown.Toggle>
       <Dropdown.Menu className={styles.menu}>
         <Dropdown.Item className={styles.item} href="#/action-1">
