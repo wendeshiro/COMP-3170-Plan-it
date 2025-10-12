@@ -9,19 +9,29 @@
   width: 402px;
   height: 874px;
   background-color: #fdfcfa;
+  overflow: visible;
+  z-index: 0;
+  position: relative;
 }
 
 .plan-it-logo {
   padding-bottom: 2rem;
 }
 
-.select-btn-container {
+.dropdown-select {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   padding-right: 2rem;
   padding-top: 2rem;
   padding-bottom: 0;
+}
+
+.dropdown {
+  flex: 1;
+  padding-left: 0.5rem;
 }
 
 .select-btn-text {

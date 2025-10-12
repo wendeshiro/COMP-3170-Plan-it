@@ -1,13 +1,18 @@
-import styles from "./Navbar.module.css";
-import backIcon from "../assets/go-back-btn.svg";
-import editIcon from "../assets/edit-btn.svg";
-import shareIcon from "../assets/share-btn.svg";
+import styles from './Navbar.module.css';
+import backIcon from '../assets/go-back-btn.svg';
+import editIcon from '../assets/edit-btn.svg';
+import shareIcon from '../assets/share-btn.svg';
 
-export default function Navbar({ navTitle }) {
+export default function Navbar({
+  navTitle,
+  onShareClick,
+  onEditClick,
+  onBackClick,
+}) {
   return (
     <nav className={styles.navBarContainer}>
       <div className="nav-item-left">
-        <button onClick={console.log("Back button clicked")}>
+        <button onClick={onBackClick}>
           <img src={backIcon} alt="go-back-btn" width={20} height={20} />
         </button>
       </div>
@@ -18,10 +23,10 @@ export default function Navbar({ navTitle }) {
       {/*Note: Title will need to read the current page name and alter accordingly*/}
 
       <div className="nav-item-right">
-        <button onClick={console.log("Edit button clicked")}>
+        <button onClick={onEditClick}>
           <img src={editIcon} alt="edit-btn" width={20} height={20} />
         </button>
-        <button onClick={console.log("Share button clicked")}>
+        <button onClick={onShareClick}>
           <img src={shareIcon} alt="share-btn" width={20} height={20} />
         </button>
       </div>
