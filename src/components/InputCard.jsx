@@ -1,7 +1,12 @@
 import styles from "./InputCard.module.css";
 import addIcon from "../assets/add-day-plus-btn.svg";
 
-export default function InputCard({ cardTitle, children, showAddButton = true, style }) {
+export default function InputCard({
+  cardTitle,
+  children,
+  showAddButton = true,
+  style,
+}) {
   return (
     <div className={styles.inputCardContainer} style={style}>
       <div>
