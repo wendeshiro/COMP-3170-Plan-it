@@ -6,12 +6,13 @@
   padding-top: 3rem;
   padding-bottom: 1rem;
   justify-content: center;
-  width: 402px;
-  height: 874px;
+  /* width: 402px; */
+  /* height: 874px; */
   background-color: #fdfcfa;
   overflow: visible;
   z-index: 0;
   position: relative;
+  /* margin: 0 auto; */
 }
 
 .plan-it-logo {
@@ -19,7 +20,8 @@
 }
 
 .dropdown-select {
-  width: 100%;
+  /* width: 100%; */
+  width: 402px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
