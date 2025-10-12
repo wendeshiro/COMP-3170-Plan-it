@@ -4,7 +4,7 @@ import styles from "./Dropdown.module.css";
 export default function BasicExample() {
   return (
     <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <Dropdown.Toggle variant="primary" id="dropdown-basic">
         Dropdown
       </Dropdown.Toggle>
 

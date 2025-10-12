@@ -1,4 +1,5 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import DeleteModal from "./components/DeleteModal";
 import { Button } from "./components/Button";
 import CreatePlanButton from "./components/AddPlan";
