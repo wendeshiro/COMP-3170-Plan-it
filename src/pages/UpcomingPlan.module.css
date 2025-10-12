@@ -1,0 +1,75 @@
+.upcomingPlan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 0.5rem; */
+  margin-top: 30px;
+  /* padding-top: 3rem; */
+  /* padding-bottom: 1rem; */
+  justify-content: center;
+  /* width: 402px; */
+  /* height: 874px; */
+  background-color: #fdfcfa;
+  /* overflow: visible; */
+  /* z-index: 0;
+  position: relative; */
+  /* margin: 0 auto; */
+}
+
+.planItLogo {
+  margin-bottom: 30px;
+}
+
+.upcomingPlanContainer {
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dropdownSelect {
+  /* width: 100%; */
+  width: 370px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* padding-right: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 0; */
+}
+
+/* .dropdown {
+  flex: 1; 
+  padding-left: 0.5rem;
+} */
+
+.selectBtnText {
+  /* display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end; */
+  font-size: 20px;
+  /* font-style: normal; */
+  font-weight: 400;
+  line-height: 20px;
+  color: #1e1e24;
+  margin: 0;
+}
+
+.planCardsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+  /* width: 402px; */
+  /* padding-top: 0.5rem;
+  padding-bottom: 0; */
+}
+
+/* .planCards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+} */
