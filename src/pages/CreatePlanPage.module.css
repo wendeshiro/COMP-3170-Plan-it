@@ -4,6 +4,7 @@
   justify-content: flex-start;
   align-items: center;
   margin-top: 30px;
+  gap: 10px;
 }
 
 .topFormContainer {
@@ -15,13 +16,23 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  row-gap: 20px;
+  row-gap: 26px;
 }
 
 .btnContainer {
-  min-width: 370px;
+  min-width: 420px;
   margin-top: 30px;
   margin-bottom: 50px;
   display: flex;
   justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .topFormContainer {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 80px;
+  }
+  .dayCardContainer {
+    width: 100%;
+  }
 }

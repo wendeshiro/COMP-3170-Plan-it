@@ -6,9 +6,7 @@ export default function InputCard({ cardTitle, children, showAddButton = true, s
     <div className={styles.inputCardContainer} style={style}>
       <div>
         <p className={styles.cardTitle}>{cardTitle}</p>
-        <div className={styles.childContent}>
-        {children}
-        </div>
+        <div className={styles.childContent}>{children}</div>
       </div>
       {showAddButton && (
         <button className={styles.addButton}>
