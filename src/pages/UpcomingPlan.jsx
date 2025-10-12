@@ -1,35 +1,35 @@
-import "./UpcomingPlan.css";
 import logo from "../assets/plan-it_logo.png";
 import PlanCard from "../components/PlanCard";
 import AddPlan from "../components/AddPlan";
 import Dropdown from "../components/Dropdown";
+import styles from "./UpcomingPlan.module.css";
 
-const UpcomingPlan = () => {
+export default function UpcomingPlan() {
   return (
-      <div className="upcoming-plan">
-        <div className="plan-it-logo">
-          <img src={logo} alt="Plan It Logo" />
-        </div>
+    <div className={styles.upcomingPlan}>
+      <div className={styles.planItLogo}>
+        <img src={logo} alt="Plan It Logo" />
+      </div>
 
-        <div className="dropdown-select">
-          <div className="dropdown">
+      <div className={styles.upcomingPlanContainer}>
+        <div className={styles.dropdownSelect}>
+          <div className={styles.dropdown}>
             <Dropdown />
           </div>
-          <h3 className="select-btn-text">Select</h3>
+          <h3 className={styles.selectBtnText}>Select</h3>
         </div>
 
-        <div className="plan-cards-container">
-          <div className="plan-cards">
-            <PlanCard planName="Our 1st Korea Trip" planDate="2025-10-05" />
-
-            <PlanCard planName="China Family Trip" planDate="2025-12-08" />
-          </div>
+        <div className={styles.planCardsContainer}>
+          <PlanCard planName="Our 1st Korea Trip" planDate="2025-10-05" />
+          <PlanCard planName="China Family Trip" planDate="2025-12-08" />
         </div>
+      </div>
 
-        <div className="add-plan-button"></div>
+      <div>
         <AddPlan />
       </div>
-  );
-};
 
-export default UpcomingPlan;
+      <div className={styles.rightColumnLarge} aria-hidden="true"></div>
+    </div>
+  );
+}
