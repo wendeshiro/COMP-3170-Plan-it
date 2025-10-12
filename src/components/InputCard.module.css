@@ -18,6 +18,11 @@
   margin-bottom: 15px;
 }
 
+.childContent {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+
 .addButton {
   background: transparent;
   border: none;

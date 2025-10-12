@@ -1,3 +1,4 @@
+import { useId } from "react";
 import styles from "./Input.module.css";
 
 function toCamelCase(str) {
@@ -7,15 +8,15 @@ function toCamelCase(str) {
   const parts = cleaned.split(/\s+/);
   return parts
     .map((p, i) =>
-      i === 0
-        ? p.toLowerCase()
-        : p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()
+      i === 0 ? p.toLowerCase() : p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()
     )
     .join("");
 }
 
-export default function Input({ title, type = "text", showDollar = false }) {
-  const id = toCamelCase(title);
+export default function Input({ title, type = "text", showDollar = false, ...props }) {
+  const reactId = useId();
+  const base = toCamelCase(title) || "input";
+  const id = `${base}-${reactId}`;
 
   return (
     <div>
@@ -25,7 +26,7 @@ export default function Input({ title, type = "text", showDollar = false }) {
         </label>
         <div className={styles.inputWrapper}>
           {showDollar && <span className={styles.dollarSign}>$</span>}
-          <input className={styles.input} type={type} id={id} name={id} />
+          <input className={styles.input} type={type} id={id} name={id} {...props} />
         </div>
       </div>
     </div>

@@ -90,6 +90,18 @@ export const Button = styled.button`
             line-height: normal;
         `}
 
+        ${(props) =>
+        props.savePlan &&
+        css`
+            width: 7.8125rem;
+            height: 3.5rem;
+            border-radius: 1.25rem;
+            font-size: 20px;
+            font-style: normal;
+            background: #4062bb;
+            color: #f7f4f0;
+        `}
+
         &:hover {
         border: none;
     }
