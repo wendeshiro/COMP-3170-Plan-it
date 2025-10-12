@@ -1,7 +1,7 @@
 .inputCardContainer {
   background-color: #f7f4f0;
   border-radius: 30px;
-  width: 370px;
+  width: 420px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -34,4 +34,17 @@
   align-items: center;
   margin: 10px auto;
   cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .childContent {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 80px;
+  }
+
+  .inputCardContainer {
+    width: 100%;
+    background-color: #f7f4f0;
+    padding: 32px;
+  }
 }

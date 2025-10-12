@@ -3,6 +3,7 @@ import PlanCard from "../components/PlanCard";
 import AddPlan from "../components/AddPlan";
 import Dropdown from "../components/Dropdown";
 import styles from "./UpcomingPlan.module.css";
+import CreatePlanPage from "./CreatePlanPage";
 
 export default function UpcomingPlan() {
   return (
@@ -25,11 +26,13 @@ export default function UpcomingPlan() {
         </div>
       </div>
 
-      <div>
+      <div className={styles.addPlanButton}>
         <AddPlan />
       </div>
 
-      <div className={styles.rightColumnLarge} aria-hidden="true"></div>
+      <div className={styles.rightColumnLarge} aria-hidden="true">
+        <CreatePlanPage />
+      </div>
     </div>
   );
 }

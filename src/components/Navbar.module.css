@@ -34,3 +34,9 @@ button {
   padding: 5px;
   cursor: pointer;
 }
+
+@media (min-width: 768px) {
+  .navBarContainer {
+    position: relative;
+  }
+}

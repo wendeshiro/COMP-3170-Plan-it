@@ -2,18 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* gap: 0.5rem; */
-  margin-top: 30px;
-  /* padding-top: 3rem; */
-  /* padding-bottom: 1rem; */
+  margin-top: 20px;
   justify-content: center;
-  /* width: 402px; */
-  /* height: 874px; */
-  background-color: #fdfcfa;
-  /* overflow: visible; */
-  /* z-index: 0;
-  position: relative; */
-  /* margin: 0 auto; */
 }
 
 .planItLogo {
@@ -34,23 +24,10 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  /* padding-right: 2rem;
-  padding-top: 2rem;
-  padding-bottom: 0; */
 }
 
-/* .dropdown {
-  flex: 1; 
-  padding-left: 0.5rem;
-} */
-
 .selectBtnText {
-  /* display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end; */
   font-size: 20px;
-  /* font-style: normal; */
   font-weight: 400;
   line-height: 20px;
   color: #1e1e24;
@@ -63,13 +40,54 @@
   align-items: center;
   gap: 16px;
   margin-top: 20px;
-  /* width: 402px; */
-  /* padding-top: 0.5rem;
-  padding-bottom: 0; */
 }
 
-/* .planCards {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-} */
+.rightColumnLarge {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .upcomingPlan {
+    display: grid;
+    grid-template-columns: 390px 1fr;
+    grid-template-rows: 100px 1fr;
+    column-gap: 60px;
+    row-gap: 20px;
+    padding: 0 40px;
+    min-height: 95vh;
+  }
+
+  .planItLogo {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    justify-self: start;
+    align-self: center;
+    margin-bottom: 0px;
+  }
+
+  .addPlanButton {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    justify-self: end;
+    align-self: center;
+  }
+
+  .upcomingPlanContainer {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    justify-self: start;
+    align-self: start;
+    background-color: #f7f4f0;
+    padding: 26px;
+    border-radius: 20px;
+    min-height: 90%;
+  }
+
+  .rightColumnLarge {
+    display: block;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    background-color: #ffffff;
+    border-radius: 20px;
+  }
+}
