@@ -10,6 +10,7 @@ import DayPlanCard from "./components/DayPlanCard";
 import DayPlanCardEvent from "./components/DayPlanCardEvent";
 import DetailsItem from "./components/DetailsItem";
 import Navbar from "./components/Navbar";
+import Dropdown from "./components/Dropdown";
 
 function App() {
   return (
@@ -98,6 +99,7 @@ function App() {
           note="Not a museum, bagel cafe"
         />
       </DayPlanCard>
+      <Dropdown />
     </div>
   );
 }
