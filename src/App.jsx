@@ -1,4 +1,5 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import DeleteModal from "./components/DeleteModal";
 import { Button } from "./components/Button";
 import CreatePlanButton from "./components/AddPlan";
@@ -10,6 +11,7 @@ import DayPlanCard from "./components/DayPlanCard";
 import DayPlanCardEvent from "./components/DayPlanCardEvent";
 import DetailsItem from "./components/DetailsItem";
 import Navbar from "./components/Navbar";
+import Dropdown from "./components/Dropdown";
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
       <Button whiteSmall>Cancel</Button>
       <Button blueLarge>Save</Button>
       <Button whiteLarge>Cancel</Button>
+      <Dropdown />
       <CreatePlanButton />
       <DeleteModal />
       <PlanCard planName="Travel plan" planDate="2025-01-01" />
