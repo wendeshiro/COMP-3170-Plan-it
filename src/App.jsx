@@ -22,6 +22,7 @@ function App() {
       <Button whiteSmall>Cancel</Button>
       <Button blueLarge>Save</Button>
       <Button whiteLarge>Cancel</Button>
+      <Dropdown />
       <CreatePlanButton />
       <DeleteModal />
       <PlanCard planName="Travel plan" planDate="2025-01-01" />
@@ -100,7 +101,6 @@ function App() {
           note="Not a museum, bagel cafe"
         />
       </DayPlanCard>
-      <Dropdown />
     </div>
   );
 }
