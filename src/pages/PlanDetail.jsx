@@ -20,7 +20,6 @@ export default function PlanDetail() {
 
   const handleEditClick = () => {
     console.log('Edit button clicked!');
-    // 여기에 편집 기능 로직을 추가하세요
   };
 
   const styles = `
