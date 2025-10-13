@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import InputCard from "../components/InputCard";
 import DetailsItem from "../components/DetailsItem";
 import DayPlanCard from "../components/DayPlanCard";
@@ -22,20 +23,56 @@ export default function PlanDetail() {
     console.log("Edit button clicked!");
   };
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const openedOnSmall = useRef(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(min-width: 768px)");
+    openedOnSmall.current = !mq.matches;
+
+    const onResize = () => {
+      if (!openedOnSmall.current) return;
+      if (window.matchMedia && window.matchMedia("(min-width: 768px)").matches) {
+        navigate("/", { state: { rightView: "detail" } });
+      }
+    };
+
+    window.addEventListener("resize", onResize);
+    try {
+      mq.addEventListener("change", onResize);
+    } catch (e) {
+      if (mq.addListener) mq.addListener(onResize);
+    }
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      try {
+        mq.removeEventListener("change", onResize);
+      } catch (e) {
+        if (mq.removeListener) mq.removeListener(onResize);
+      }
+    };
+  }, [navigate, location]);
+
   const handleBackClick = () => {
-    console.log("Back button clicked!");
+    // go back in history if possible, otherwise go to home
+    try {
+      navigate(-1);
+    } catch (e) {
+      navigate("/");
+    }
   };
 
   return (
     <div>
-      <nav>
-        <Navbar
-          navTitle="Details"
-          onShareClick={handleShareClick}
-          onEditClick={handleEditClick}
-          onBackClick={handleBackClick}
-        />
-      </nav>
+      <Navbar
+        navTitle="Details"
+        onShareClick={handleShareClick}
+        onEditClick={handleEditClick}
+        onBackClick={handleBackClick}
+      />
       <div className={styles.planDetail}>
         <InputCard
           cardTitle="Our 1st Korea Trip"
