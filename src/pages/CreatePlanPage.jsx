@@ -1,6 +1,6 @@
 import styles from "./CreatePlanPage.module.css";
 import Navbar from "../components/Navbar";
-import Input from "../components/input";
+import Input from "../components/Input";
 import InputCard from "../components/InputCard";
 import { Button } from "../components/Button";
 import { useEffect, useRef } from "react";
