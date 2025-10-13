@@ -72,5 +72,11 @@
   color: #58585d;
   background: none;
   border: none;
-  font-size: 13px;
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  .seeDetailsButton {
+    font-size: 18px;
+  }
 }

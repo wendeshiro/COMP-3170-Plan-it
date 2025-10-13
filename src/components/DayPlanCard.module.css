@@ -27,6 +27,10 @@
     padding: 32px 80px;
   }
 
+  .dayPlanCardContent {
+    max-width: 740px;
+    margin: 0 auto;
+  }
   .cardTitle {
     font-size: 28px;
   }

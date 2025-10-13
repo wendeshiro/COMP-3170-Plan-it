@@ -5,30 +5,58 @@ import Dropdown from "../components/Dropdown";
 import styles from "./UpcomingPlan.module.css";
 import CreatePlanPage from "./CreatePlanPage";
 import PlanDetail from "./PlanDetail";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function UpcomingPlan() {
   const [rightView, setRightView] = useState("detail"); // 'detail' | 'create'
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // If we arrived via navigation with a request to open the right view, honor it
+  useEffect(() => {
+    if (location && location.state && location.state.rightView) {
+      setRightView(location.state.rightView);
+      // clear the navigation state so refresh doesn't reapply
+      try {
+        navigate(location.pathname, { replace: true, state: {} });
+      } catch (e) {
+        // ignore
+      }
+    }
+  }, [location, navigate]);
 
   const handleAddPlanClick = useCallback(() => {
-    // Only switch to CreatePlanPage on screens >= 768px
     if (typeof window !== "undefined" && window.matchMedia) {
       const mq = window.matchMedia("(min-width: 768px)");
       if (mq.matches) {
+        // desktop/tablet: show create in right column
         setRightView("create");
+      } else {
+        // small screens: navigate to the create page route
+        navigate("/create");
       }
+    } else {
+      // fallback: navigate to create
+      navigate("/create");
     }
   }, []);
 
   const handleSeeDetails = useCallback(() => {
-    // Only switch to PlanDetail on screens >= 768px
     if (typeof window !== "undefined" && window.matchMedia) {
       const mq = window.matchMedia("(min-width: 768px)");
       if (mq.matches) {
+        // desktop/tablet: show detail in right column
         setRightView("detail");
+      } else {
+        // small screens: navigate to detail route
+        navigate("/detail");
       }
+    } else {
+      // fallback: navigate to detail
+      navigate("/detail");
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <div className={styles.upcomingPlan}>
@@ -45,8 +73,16 @@ export default function UpcomingPlan() {
         </div>
 
         <div className={styles.planCardsContainer}>
-          <PlanCard planName="Our 1st Korea Trip" planDate="2025-10-05" onSeeDetails={handleSeeDetails} />
-          <PlanCard planName="China Family Trip" planDate="2025-12-08" onSeeDetails={handleSeeDetails} />
+          <PlanCard
+            planName="Our 1st Korea Trip"
+            planDate="2025-10-05"
+            onSeeDetails={handleSeeDetails}
+          />
+          <PlanCard
+            planName="China Family Trip"
+            planDate="2025-12-08"
+            onSeeDetails={handleSeeDetails}
+          />
         </div>
       </div>
 
@@ -55,7 +91,11 @@ export default function UpcomingPlan() {
       </div>
 
       <div className={styles.rightColumnLarge}>
-        {rightView === "create" ? <CreatePlanPage /> : <PlanDetail />}
+        {rightView === "create" ? (
+          <CreatePlanPage onClose={() => setRightView("detail")} />
+        ) : (
+          <PlanDetail />
+        )}
       </div>
     </div>
   );
