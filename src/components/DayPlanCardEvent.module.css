@@ -55,3 +55,27 @@
   font-size: 16px;
   text-align: right;
 }
+
+@media (min-width: 768px) {
+  /* .eventDetails {
+    align-items: flex-start;
+  }
+
+  .eventContainer {
+    column-gap: 80px;
+  } */
+
+  .eventTime,
+  .eventDate {
+    font-size: 18px;
+  }
+
+  .event {
+    font-size: 25px;
+    line-height: 25px;
+  }
+
+  .note {
+    font-size: 20px;
+  }
+}

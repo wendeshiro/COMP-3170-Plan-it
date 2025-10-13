@@ -1,7 +1,7 @@
 .dayPlanCardContainer {
   background-color: #f7f4f0;
   border-radius: 30px;
-  width: 370px;
+  width: 420px;
   height: auto;
   padding: 25px;
 }
@@ -18,4 +18,20 @@
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .dayPlanCardContainer {
+    width: 100%;
+    background-color: #f7f4f0;
+    padding: 32px 80px;
+  }
+
+  .cardTitle {
+    font-size: 28px;
+  }
+
+  .weather {
+    font-size: 22px;
+  }
 }
