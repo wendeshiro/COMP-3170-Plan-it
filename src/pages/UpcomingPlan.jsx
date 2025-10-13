@@ -78,11 +78,11 @@ export default function UpcomingPlan() {
             planDate="2025-10-05"
             onSeeDetails={handleSeeDetails}
           />
-          <PlanCard
+          {/* <PlanCard
             planName="China Family Trip"
             planDate="2025-12-08"
             onSeeDetails={handleSeeDetails}
-          />
+          /> */}
         </div>
       </div>
 
