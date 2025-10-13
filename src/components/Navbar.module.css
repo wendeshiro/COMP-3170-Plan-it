@@ -17,10 +17,10 @@
   margin: auto;
 }
 
-.nav-item-left {
+/* .nav-item-left {
   display: flex;
   margin-left: auto;
-}
+} */
 
 .nav-item-right {
   display: flex;
@@ -38,5 +38,13 @@ button {
 @media (min-width: 768px) {
   .navBarContainer {
     position: relative;
+  }
+
+  .navItemLeft {
+    display: none;
+  }
+
+  .shareBtn {
+    display: none;
   }
 }

@@ -11,7 +11,7 @@ export default function Navbar({
 }) {
   return (
     <nav className={styles.navBarContainer}>
-      <div className="nav-item-left">
+      <div className={styles.navItemLeft}>
         <button onClick={onBackClick}>
           <img src={backIcon} alt="go-back-btn" width={20} height={20} />
         </button>
@@ -26,7 +26,7 @@ export default function Navbar({
         <button onClick={onEditClick}>
           <img src={editIcon} alt="edit-btn" width={20} height={20} />
         </button>
-        <button onClick={onShareClick}>
+        <button onClick={onShareClick} className={styles.shareBtn}>
           <img src={shareIcon} alt="share-btn" width={20} height={20} />
         </button>
       </div>
