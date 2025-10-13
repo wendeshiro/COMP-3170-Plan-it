@@ -8,8 +8,6 @@ function App() {
   return (
     <div>
       <UpcomingPlan />
-      <PlanDetail />
-      <CreatePlanPage />
     </div>
   );
 }

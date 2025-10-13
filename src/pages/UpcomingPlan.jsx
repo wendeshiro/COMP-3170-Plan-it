@@ -5,8 +5,31 @@ import Dropdown from "../components/Dropdown";
 import styles from "./UpcomingPlan.module.css";
 import CreatePlanPage from "./CreatePlanPage";
 import PlanDetail from "./PlanDetail";
+import { useState, useCallback } from "react";
 
 export default function UpcomingPlan() {
+  const [rightView, setRightView] = useState("detail"); // 'detail' | 'create'
+
+  const handleAddPlanClick = useCallback(() => {
+    // Only switch to CreatePlanPage on screens >= 768px
+    if (typeof window !== "undefined" && window.matchMedia) {
+      const mq = window.matchMedia("(min-width: 768px)");
+      if (mq.matches) {
+        setRightView("create");
+      }
+    }
+  }, []);
+
+  const handleSeeDetails = useCallback(() => {
+    // Only switch to PlanDetail on screens >= 768px
+    if (typeof window !== "undefined" && window.matchMedia) {
+      const mq = window.matchMedia("(min-width: 768px)");
+      if (mq.matches) {
+        setRightView("detail");
+      }
+    }
+  }, []);
+
   return (
     <div className={styles.upcomingPlan}>
       <div className={styles.planItLogo}>
@@ -22,18 +45,17 @@ export default function UpcomingPlan() {
         </div>
 
         <div className={styles.planCardsContainer}>
-          <PlanCard planName="Our 1st Korea Trip" planDate="2025-10-05" />
-          <PlanCard planName="China Family Trip" planDate="2025-12-08" />
+          <PlanCard planName="Our 1st Korea Trip" planDate="2025-10-05" onSeeDetails={handleSeeDetails} />
+          <PlanCard planName="China Family Trip" planDate="2025-12-08" onSeeDetails={handleSeeDetails} />
         </div>
       </div>
 
       <div className={styles.addPlanButton}>
-        <AddPlan />
+        <AddPlan onClick={handleAddPlanClick} />
       </div>
 
       <div className={styles.rightColumnLarge}>
-        {/* <CreatePlanPage /> */}
-        <PlanDetail />
+        {rightView === "create" ? <CreatePlanPage /> : <PlanDetail />}
       </div>
     </div>
   );
