@@ -1,8 +1,17 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import UpcomingPlan from "./pages/UpcomingPlan";
+import CreatePlanPage from "./pages/CreatePlanPage";
+import PlanDetail from "./pages/PlanDetail";
 
 function App() {
-  return <div></div>;
+  return (
+    <div>
+      <UpcomingPlan />
+      <PlanDetail />
+      <CreatePlanPage />
+    </div>
+  );
 }
 
 export default App;

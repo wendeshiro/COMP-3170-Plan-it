@@ -4,6 +4,7 @@ import AddPlan from "../components/AddPlan";
 import Dropdown from "../components/Dropdown";
 import styles from "./UpcomingPlan.module.css";
 import CreatePlanPage from "./CreatePlanPage";
+import PlanDetail from "./PlanDetail";
 
 export default function UpcomingPlan() {
   return (
@@ -30,8 +31,9 @@ export default function UpcomingPlan() {
         <AddPlan />
       </div>
 
-      <div className={styles.rightColumnLarge} aria-hidden="true">
-        <CreatePlanPage />
+      <div className={styles.rightColumnLarge}>
+        {/* <CreatePlanPage /> */}
+        <PlanDetail />
       </div>
     </div>
   );

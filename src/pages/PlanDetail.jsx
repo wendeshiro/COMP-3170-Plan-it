@@ -5,6 +5,7 @@ import DayPlanCard from "../components/DayPlanCard";
 import DayPlanCardEvent from "../components/DayPlanCardEvent";
 import PlanShareModal from "../components/PlanShareModal";
 import Navbar from "../components/Navbar";
+import styles from "./PlanDetail.module.css";
 
 export default function PlanDetail() {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -25,37 +26,8 @@ export default function PlanDetail() {
     console.log("Back button clicked!");
   };
 
-  const styles = `
-    
-
-.planDetail {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-
-        margin: 20px 16px 16px 16px;
-        padding: 0;
-    }
-    .modalOverlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-    }
-
-
-    `;
-
   return (
-    <>
-      <style>{styles}</style>
+    <div>
       <nav>
         <Navbar
           navTitle="Details"
@@ -64,7 +36,7 @@ export default function PlanDetail() {
           onBackClick={handleBackClick}
         />
       </nav>
-      <div className="planDetail">
+      <div className={styles.planDetail}>
         <InputCard
           cardTitle="Our 1st Korea Trip"
           showAddButton={false}
@@ -122,12 +94,12 @@ export default function PlanDetail() {
 
       {/* Share Modal */}
       {isShareModalOpen && (
-        <div className="modalOverlay" onClick={handleCloseModal}>
+        <div className={styles.modalOverlay} onClick={handleCloseModal}>
           <div onClick={(e) => e.stopPropagation()}>
             <PlanShareModal onClose={handleCloseModal} />
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
