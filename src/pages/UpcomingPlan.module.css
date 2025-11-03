@@ -1,20 +1,11 @@
 .upcomingPlan {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  justify-content: center;
-}
-
-.planItLogo {
-  margin-bottom: 30px;
-}
-
-.upcomingPlanContainer {
-  margin-bottom: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 390px 1fr;
+  grid-template-rows: 100px 1fr;
+  column-gap: 60px;
+  row-gap: 20px;
+  padding: 0 40px;
+  min-height: 95vh;
 }
 
 .dropdownSelect {
@@ -26,15 +17,6 @@
   align-items: center;
 }
 
-.selectBtnText {
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 20px;
-  /* color: #1e1e24; */
-  color: transparent; /* Hide for milestone 1 */
-  margin: 0;
-}
-
 .planCardsContainer {
   display: flex;
   flex-direction: column;
@@ -43,52 +25,51 @@
   margin-top: 20px;
 }
 
-.rightColumnLarge {
-  display: none;
+.planItLogo {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  justify-self: start;
+  align-self: center;
+  margin-bottom: 0px;
 }
 
-@media (min-width: 768px) {
-  .upcomingPlan {
-    display: grid;
-    grid-template-columns: 390px 1fr;
-    grid-template-rows: 100px 1fr;
-    column-gap: 60px;
-    row-gap: 20px;
-    padding: 0 40px;
-    min-height: 95vh;
-  }
+.addPlanButton {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  justify-self: end;
+  align-self: center;
+}
 
-  .planItLogo {
-    grid-column: 1/2;
-    grid-row: 1/2;
-    justify-self: start;
-    align-self: center;
-    margin-bottom: 0px;
-  }
+.upcomingPlanContainer {
+  grid-column: 1/2;
+  grid-row: 2/3;
+  justify-self: start;
+  align-self: start;
+  background-color: #f7f4f0;
+  padding: 26px;
+  border-radius: 20px;
+  height: auto;
+  /* max-height: 100vh;
+  overflow-y: auto; */
+}
 
-  .addPlanButton {
-    grid-column: 2/3;
-    grid-row: 1/2;
-    justify-self: end;
-    align-self: center;
-  }
+.rightColumnLarge {
+  display: block;
+  grid-column: 2/3;
+  grid-row: 2/3;
+  background-color: #ffffff;
+  border-radius: 20px;
+}
 
-  .upcomingPlanContainer {
-    grid-column: 1/2;
-    grid-row: 2/3;
-    justify-self: start;
-    align-self: start;
-    background-color: #f7f4f0;
-    padding: 26px;
-    border-radius: 20px;
-    min-height: 90%;
-  }
-
-  .rightColumnLarge {
-    display: block;
-    grid-column: 2/3;
-    grid-row: 2/3;
-    background-color: #ffffff;
-    border-radius: 20px;
-  }
+.clickPrompt {
+  color: #393939;
+  font-size: 20px;
+  text-align: center;
+  background-color: #f7f4f0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
 }

@@ -37,10 +37,20 @@ export default function PlanCard({ planName, planDate, onSeeDetails }) {
           <img src={member2} alt="member2" />
           <img src={member3} alt="member3" />
         </div>
-        <div className={styles.detailsSection}>
-          <button className={styles.seeDetailsButton} onClick={handleSeeDetailsClick}>
-            See details
-          </button>
+        <div
+          className={styles.detailsSection}
+          onClick={handleSeeDetailsClick}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handleSeeDetailsClick();
+            }
+          }}
+          style={{ cursor: "pointer" }}
+        >
+          <button className={styles.seeDetailsButton}>See details</button>
           <img src={arrowIcon} alt="arrow" />
         </div>
       </div>
