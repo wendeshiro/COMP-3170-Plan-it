@@ -3,10 +3,17 @@
   background-color: #fdfcfa;
   border: 2px solid #d1d1d7;
   border-radius: 19px;
-  width: 370px;
+  /* width: 370px; */
+  width: 100%;
+  max-width: 370px;
+  /* min-width: 300px; */
   height: 184px;
   margin: 0;
   position: relative;
+
+  @media (max-width: 960px) {
+    width: 300px;
+  }
 
   h3 {
     font-size: 25px;
@@ -73,4 +80,3 @@
   border: none;
   font-size: 18px;
 }
-

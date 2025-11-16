@@ -1,8 +1,9 @@
-.wrapper {
-}
+/* .wrapper {
+} */
 
 .toggle {
-  width: 17.3125rem;
+  /* width: 17.3125rem; */
+  width: 200px;
   height: 4.188rem;
   display: flex;
   justify-content: space-between;

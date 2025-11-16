@@ -27,7 +27,7 @@
   justify-content: space-between;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
   .topFormContainer {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 80px;

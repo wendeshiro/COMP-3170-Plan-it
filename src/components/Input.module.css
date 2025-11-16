@@ -30,7 +30,7 @@
   color: #1e1e24;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
   .inputContainer {
     width: 380px;
   }

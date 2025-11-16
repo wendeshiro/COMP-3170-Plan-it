@@ -36,11 +36,11 @@
   cursor: pointer;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
   .inputCardContainer {
     width: 100%;
     background-color: #f7f4f0;
-    padding: 32px;
+    padding: 32px 80px;
   }
 
   .childContent {
