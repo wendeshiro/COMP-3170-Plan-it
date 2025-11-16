@@ -20,7 +20,7 @@
   margin-bottom: 20px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
   .dayPlanCardContainer {
     width: 100%;
     background-color: #f7f4f0;

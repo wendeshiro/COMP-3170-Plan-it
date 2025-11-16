@@ -3,7 +3,7 @@
   margin-bottom: 20px;
 }
 
-.label {
+.labelTitle {
   display: block;
   color: #58585d;
   font-size: var(--input-label-size, 25px);
@@ -30,7 +30,7 @@
   color: #1e1e24;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
   .inputContainer {
     width: 380px;
   }

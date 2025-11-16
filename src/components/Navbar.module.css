@@ -41,7 +41,7 @@ button {
   cursor: pointer;
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .navBarContainer {
     position: relative;
   }
@@ -49,4 +49,4 @@ button {
   .navItemLeft {
     display: none;
   }
-}
+} */

@@ -2,15 +2,20 @@
   display: grid;
   grid-template-columns: 390px 1fr;
   grid-template-rows: 100px 1fr;
-  column-gap: 60px;
+  column-gap: 20px;
   row-gap: 20px;
   padding: 20px 40px 0;
   min-height: 95vh;
+
+  @media (max-width: 960px) {
+    grid-template-columns: 330px 1fr;
+    column-gap: 10px;
+  }
 }
 
 .dropdownSelect {
-  /* width: 100%; */
-  width: 370px;
+  width: 100%;
+  /* width: 370px; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -46,9 +51,10 @@
   justify-self: start;
   align-self: start;
   background-color: #f7f4f0;
-  padding: 26px;
+  padding: 30px 20px;
   border-radius: 20px;
   height: auto;
+  width: 100%;
   /* max-height: 100vh;
   overflow-y: auto; */
 }

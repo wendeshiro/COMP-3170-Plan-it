@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useId, forwardRef } from "react";
 import styles from "./Input.module.css";
 
 function toCamelCase(str) {
@@ -13,7 +13,10 @@ function toCamelCase(str) {
     .join("");
 }
 
-export default function Input({ title, type = "text", showDollar = false, ...props }) {
+export default forwardRef(function Input(
+  { title, type = "text", showDollar = false, ...props },
+  ref
+) {
   const reactId = useId();
   const base = toCamelCase(title) || "input";
   const id = `${base}-${reactId}`;
@@ -21,14 +24,14 @@ export default function Input({ title, type = "text", showDollar = false, ...pro
   return (
     <div>
       <div className={styles.inputContainer}>
-        <label className={styles.label} htmlFor={id}>
+        <label className={styles.labelTitle} htmlFor={id}>
           {title}
         </label>
         <div className={styles.inputWrapper}>
           {showDollar && <span className={styles.dollarSign}>$</span>}
-          <input className={styles.input} type={type} id={id} name={id} {...props} />
+          <input ref={ref} className={styles.input} type={type} id={id} name={id} {...props} />
         </div>
       </div>
     </div>
   );
-}
+});
