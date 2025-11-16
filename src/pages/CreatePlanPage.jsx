@@ -5,7 +5,7 @@ import InputCard from "../components/InputCard";
 import { Button } from "../components/Button";
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { format } from "date-fns";
+import { format, differenceInCalendarDays, addDays } from "date-fns";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
@@ -69,6 +69,16 @@ export default function CreatePlanPage({ onClose } = {}) {
     setShowDatePicker(true);
   }
 
+  // compute total days from selected range (inclusive)
+  const startDate = state && state[0] && state[0].startDate ? state[0].startDate : null;
+  const endDate = state && state[0] && state[0].endDate ? state[0].endDate : null;
+  let totalDays = 0;
+  if (startDate && endDate) {
+    totalDays = differenceInCalendarDays(endDate, startDate) + 1;
+    if (totalDays < 1) totalDays = 1;
+  } else if (startDate && !endDate) {
+    totalDays = 1;
+  }
   return (
     <div>
       <Navbar navTitle="A New Plan" showActions={false} onBackClick={handleBackClick} />
@@ -118,22 +128,23 @@ export default function CreatePlanPage({ onClose } = {}) {
           <Input title="Budget" type="number" showDollar min={0} />
         </div>
         <div className={styles.dayCardContainer}>
-          <InputCard cardTitle={"Day 01"}>
-            <Input title="Location 01" />
-            <Input title="Date" type="date" />
-            <Input title="Time" type="time" />
-            <Input title="Note" />
-          </InputCard>
-          <InputCard cardTitle={"Day 02"}>
-            <Input title="Location 01" />
-            <Input title="Date" type="date" />
-            <Input title="Time" type="time" />
-            <Input title="Note" />
-          </InputCard>
+          {Array.from({ length: Math.max(1, totalDays) }).map((_, i) => {
+            const dayIndex = i + 1;
+            const cardTitle = `Day ${String(dayIndex).padStart(2, "0")}`;
+            const defaultDateValue = startDate ? format(addDays(startDate, i), "yyyy-MM-dd") : "";
+            return (
+              <InputCard
+                key={i}
+                cardTitle={cardTitle}
+                initialEntries={1}
+                dateValue={defaultDateValue}
+              />
+            );
+          })}
         </div>
         <div className={styles.btnContainer}>
           <Button
-            whiteSmall
+            $whiteSmall
             onClick={() => {
               if (typeof onClose === "function") onClose();
             }}
@@ -141,7 +152,7 @@ export default function CreatePlanPage({ onClose } = {}) {
             Cancel
           </Button>
           <Button
-            savePlan
+            $savePlan
             onClick={() => {
               if (typeof onClose === "function") onClose();
             }}

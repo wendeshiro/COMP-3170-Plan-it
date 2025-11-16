@@ -36,7 +36,7 @@ export const Button = styled.button`
         `}
 
         ${(props) =>
-        props.whiteSmall &&
+        props.$whiteSmall &&
         css`
             width: 7.8125rem;
             height: 3.5rem;
@@ -91,7 +91,7 @@ export const Button = styled.button`
         `}
 
         ${(props) =>
-        props.savePlan &&
+        props.$savePlan &&
         css`
             width: 7.8125rem;
             height: 3.5rem;

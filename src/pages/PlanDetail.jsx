@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import InputCard from "../components/InputCard";
+import InputCardInDetails from "../components/InputCardInDetails";
 import DetailsItem from "../components/DetailsItem";
 import DayPlanCard from "../components/DayPlanCard";
 import DayPlanCardEvent from "../components/DayPlanCardEvent";
@@ -47,7 +47,7 @@ export default function PlanDetail({ onClose } = {}) {
         onBackClick={handleBackClick}
       />
       <div className={styles.planDetail}>
-        <InputCard
+        <InputCardInDetails
           cardTitle="Our 1st Korea Trip"
           showAddButton={false}
           style={{ "--input-label-size": "20px" }}
@@ -56,7 +56,7 @@ export default function PlanDetail({ onClose } = {}) {
           <DetailsItem title="Destination" content="South Korea" />
           <DetailsItem title="Budget in currency" content="$4000" />
           <DetailsItem title="Members" content="wende, jisoo, yejin, sam" />
-        </InputCard>
+        </InputCardInDetails>
         <DayPlanCard cardTitle="Day 01 - Oct 3rd, 4th" weatherIcon="☀️" weather="Sunny 16°C / 11°C">
           <DayPlanCardEvent
             date="2025/10/03"
