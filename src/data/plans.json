@@ -1,0 +1,190 @@
+[
+  {
+    "id": "p1",
+    "name": "Our 1st Korea Trip",
+    "startDate": "2025-10-01",
+    "endDate": "2025-10-05",
+    "destination": "South Korea",
+    "budget": 4000,
+    "daysCount": 5,
+    "createdAt": "2025-05-01T00:00:00.000Z",
+    "days": [
+      {
+        "date": "2025-10-01",
+        "events": [
+          { "time": "07:20", "location": "Vancouver airport", "note": "Double-check visa!" },
+          { "time": "18:00", "location": "Incheon airport" },
+          { "time": "20:00", "location": "Hotel check-in", "note": "Lotte Hotel in Hongdae" }
+        ]
+      },
+      {
+        "date": "2025-10-02",
+        "events": [
+          {
+            "time": "08:00",
+            "location": "Korean style brunch",
+            "note": "Very spicy hotpot! (Gukbap!)"
+          },
+          {
+            "time": "10:00",
+            "location": "Starfield Library",
+            "note": "Very big beautiful library. and % cafe!"
+          },
+          { "time": "11:30", "location": "Shopping at Coex mall", "note": "Free time! shopping!!" }
+        ]
+      },
+      {
+        "date": "2025-10-03",
+        "events": [
+          { "time": "09:00", "location": "Gyeongbokgung Palace", "note": "Morning sightseeing" },
+          { "time": "12:00", "location": "Insadong", "note": "Lunch and traditional shopping" },
+          { "time": "15:00", "location": "Cheonggyecheon Stream", "note": "Relax walk" }
+        ]
+      },
+      {
+        "date": "2025-10-04",
+        "events": [
+          { "time": "08:30", "location": "Bukchon Hanok Village", "note": "Photo time" },
+          { "time": "11:00", "location": "Hongdae Street", "note": "Cafe hopping" },
+          { "time": "14:00", "location": "Myeongdong", "note": "Shopping" }
+        ]
+      },
+      {
+        "date": "2025-10-05",
+        "events": [
+          { "time": "07:00", "location": "Hotel breakfast" },
+          { "time": "09:00", "location": "Check-out" },
+          { "time": "11:00", "location": "Incheon Airport", "note": "Flight home" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "p2",
+    "name": "China Family Trip",
+    "startDate": "2025-12-08",
+    "endDate": "2025-12-13",
+    "destination": "China",
+    "budget": 3000,
+    "daysCount": 6,
+    "createdAt": "2025-06-01T00:00:00.000Z",
+    "days": [
+      {
+        "date": "2025-12-08",
+        "events": [
+          { "time": "09:00", "location": "Beijing Airport", "note": "Check-in and luggage drop" },
+          { "time": "12:00", "location": "Hotel Check-in", "note": "Grand Hyatt Beijing" },
+          { "time": "14:00", "location": "Tiananmen Square", "note": "Sightseeing and photos" }
+        ]
+      },
+      {
+        "date": "2025-12-09",
+        "events": [
+          { "time": "08:00", "location": "Breakfast at hotel" },
+          { "time": "09:30", "location": "Forbidden City", "note": "Guided tour" },
+          { "time": "13:00", "location": "Lunch at local restaurant", "note": "Try Peking duck" }
+        ]
+      },
+      {
+        "date": "2025-12-10",
+        "events": [
+          { "time": "07:30", "location": "Breakfast" },
+          { "time": "08:30", "location": "Great Wall of China", "note": "Mutianyu section" },
+          { "time": "12:30", "location": "Lunch near Great Wall" }
+        ]
+      },
+      {
+        "date": "2025-12-11",
+        "events": [
+          { "time": "08:00", "location": "Summer Palace", "note": "Boat ride on the lake" },
+          { "time": "12:00", "location": "Lunch at local restaurant" },
+          { "time": "14:00", "location": "Shopping at Wangfujing", "note": "Souvenirs for family" }
+        ]
+      },
+      {
+        "date": "2025-12-12",
+        "events": [
+          { "time": "08:00", "location": "Breakfast and check-out" },
+          { "time": "10:00", "location": "Beijing Airport", "note": "Flight back home" },
+          { "time": "11:00", "location": "Airport lounge", "note": "Relax before flight" }
+        ]
+      },
+      {
+        "date": "2025-12-13",
+        "events": [
+          { "time": "07:00", "location": "Flight back" },
+          { "time": "09:00", "location": "Arrival at home" },
+          { "time": "10:00", "location": "Unpack and rest" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "p3",
+    "name": "Japan Family Trip",
+    "startDate": "2025-12-20",
+    "endDate": "2025-12-26",
+    "destination": "Japan",
+    "budget": 3500,
+    "daysCount": 7,
+    "createdAt": "2025-07-01T00:00:00.000Z",
+    "days": [
+      {
+        "date": "2025-12-20",
+        "events": [
+          { "time": "10:00", "location": "Narita Airport", "note": "Arrive in Tokyo" },
+          { "time": "12:00", "location": "Hotel Check-in", "note": "Park Hyatt Tokyo" },
+          { "time": "14:00", "location": "Shibuya Crossing", "note": "Sightseeing and shopping" }
+        ]
+      },
+      {
+        "date": "2025-12-21",
+        "events": [
+          { "time": "08:00", "location": "Breakfast at hotel" },
+          { "time": "09:00", "location": "Tokyo Tower", "note": "View Tokyo skyline" },
+          { "time": "12:00", "location": "Lunch at sushi restaurant" }
+        ]
+      },
+      {
+        "date": "2025-12-22",
+        "events": [
+          { "time": "07:30", "location": "Breakfast" },
+          { "time": "08:30", "location": "Disneyland Tokyo", "note": "Full-day fun" },
+          { "time": "19:00", "location": "Return to hotel", "note": "Rest after park" }
+        ]
+      },
+      {
+        "date": "2025-12-23",
+        "events": [
+          { "time": "08:00", "location": "Breakfast" },
+          { "time": "09:00", "location": "Ueno Zoo", "note": "Family visit" },
+          { "time": "12:00", "location": "Lunch in Ueno" }
+        ]
+      },
+      {
+        "date": "2025-12-24",
+        "events": [
+          { "time": "08:00", "location": "Breakfast" },
+          { "time": "09:00", "location": "Asakusa Temple", "note": "Cultural sightseeing" },
+          { "time": "12:00", "location": "Lunch" }
+        ]
+      },
+      {
+        "date": "2025-12-25",
+        "events": [
+          { "time": "08:00", "location": "Breakfast" },
+          { "time": "09:00", "location": "Odaiba", "note": "Shopping and entertainment" },
+          { "time": "12:00", "location": "Lunch at Odaiba" }
+        ]
+      },
+      {
+        "date": "2025-12-26",
+        "events": [
+          { "time": "08:00", "location": "Breakfast and check-out" },
+          { "time": "10:00", "location": "Narita Airport", "note": "Flight back home" },
+          { "time": "12:00", "location": "Airport lounge", "note": "Relax before flight" }
+        ]
+      }
+    ]
+  }
+]

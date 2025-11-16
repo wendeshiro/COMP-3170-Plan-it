@@ -9,9 +9,6 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "engines": {
-    "node": "20.x"
-  },
   "dependencies": {
     "bootstrap": "^5.3.8",
     "date-fns": "^4.1.0",
@@ -20,7 +17,8 @@
     "react-date-range": "^2.0.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.4",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.1.19",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
