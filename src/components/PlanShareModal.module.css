@@ -13,6 +13,7 @@
     position: absolute;
     top: 20px;
     right: 20px;
+    cursor: pointer;
   }
 }
 
@@ -23,30 +24,21 @@
   align-items: center;
   justify-content: center;
   flex: auto;
-  gap: 45px;
+  margin: 0;
 
   p {
     color: #4062bb;
     font-size: 13px;
     font-weight: 400;
     margin-top: 10px;
-  }
-
-  .share {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    img {
-      width: 35px;
-      height: 35px;
-    }
+    margin-bottom: 5px;
   }
 
   .export {
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
 
     img {
       width: 35px;
