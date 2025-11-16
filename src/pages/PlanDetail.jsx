@@ -52,50 +52,34 @@ export default function PlanDetail({ onClose } = {}) {
           showAddButton={false}
           style={{ "--input-label-size": "20px" }}
         >
-          <DetailsItem title="Date" content="2025/10/04 - 2025/10/14" />
+          <DetailsItem title="Date Range" content="2025/10/01 - 2025/10/11" />
+          <DetailsItem title="Total Days" content="11" />
           <DetailsItem title="Destination" content="South Korea" />
-          <DetailsItem title="Budget in currency" content="$4000" />
-          <DetailsItem title="Members" content="wende, jisoo, yejin, sam" />
+          <DetailsItem title="Budget" content="$4000" />
         </InputCardInDetails>
-        <DayPlanCard cardTitle="Day 01 - Oct 3rd, 4th" weatherIcon="☀️" weather="Sunny 16°C / 11°C">
-          <DayPlanCardEvent
-            date="2025/10/03"
-            time="7:20"
-            timeZone="PST"
-            event="Vancouver airport"
-            note="Double-check visa!"
-          />
-          <DayPlanCardEvent date="2025/10/04" time="18:00" timeZone="KST" event="Incheon airport" />
-          <DayPlanCardEvent
-            date="2025/10/04"
-            time="20:00"
-            timeZone="KST"
-            event="Hotel check-in"
-            note="Lotte Hotel in Hongdae"
-          />
+        <DayPlanCard cardTitle="Day 01 - 2025/10/01">
+          <DayPlanCardEvent time="7:20" event="Vancouver airport" note="Double-check visa!" />
+          <DayPlanCardEvent time="18:00" event="Incheon airport" />
+          <DayPlanCardEvent time="20:00" event="Hotel check-in" note="Lotte Hotel in Hongdae" />
         </DayPlanCard>
-        <DayPlanCard cardTitle="Day 02 - Oct 5th" weatherIcon="⛅️" weather="Cloudy 18°C / 9°C">
+        <DayPlanCard cardTitle="Day 02 - 2025/10/02">
           <DayPlanCardEvent
             time="8:00"
-            timeZone="KST"
             event="Korean style brunch"
             note="Very spicy hotpot! (Gukbap!)"
           />
           <DayPlanCardEvent
             time="10:00"
-            timeZone="KST"
             event="Starfield Library"
             note="Very big beautiful library. and % cafe!"
           />
           <DayPlanCardEvent
             time="11:30"
-            timeZone="KST"
             event="Shopping at Coex mall"
             note="Free time! shopping!!"
           />
           <DayPlanCardEvent
             time="14:30"
-            timeZone="KST"
             event="London Bagel Museum"
             note="Not a museum, bagel cafe"
           />
