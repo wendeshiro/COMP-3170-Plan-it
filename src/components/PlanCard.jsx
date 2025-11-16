@@ -10,6 +10,7 @@ export default function PlanCard({
   planId,
   planName,
   planDate,
+  daysCount,
   onSeeDetails,
   selectMode = false,
   isChecked = false,
@@ -47,11 +48,12 @@ export default function PlanCard({
         </div>
       )}
       <div>
-        <div className={styles.dynamicContents}>
+        {/* <div className={styles.dynamicContents}>
           <img src={member1} alt="member1" />
           <img src={member2} alt="member2" />
           <img src={member3} alt="member3" />
-        </div>
+        </div> */}
+        <div className={styles.daysCount}>{daysCount} Days</div>
         <div
           className={styles.detailsSection}
           onClick={handleSeeDetailsClick}
