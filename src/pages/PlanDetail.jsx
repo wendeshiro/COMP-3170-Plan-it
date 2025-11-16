@@ -45,7 +45,7 @@ export default function PlanDetail({ planId, onClose } = {}) {
   };
 
   return (
-    <div>
+    <div id="pdf-target">
       <Navbar
         navTitle="Details"
         onShareClick={handleShareClick}
