@@ -45,80 +45,82 @@ export default function PlanDetail({ planId, onClose } = {}) {
   };
 
   return (
-    <div id="pdf-target">
-      <Navbar
-        navTitle="Details"
-        onShareClick={handleShareClick}
-        onEditClick={handleEditClick}
-        onBackClick={handleBackClick}
-      />
-      <div className={styles.planDetail}>
-        {plan ? (
-          <>
-            <InputCardInDetails
-              cardTitle={plan.name}
-              showAddButton={false}
-              style={{ "--input-label-size": "20px" }}
-            >
-              <DetailsItem
-                title="Date Range"
-                content={`${plan.startDate.replaceAll("-", "/")} - ${plan.endDate.replaceAll(
-                  "-",
-                  "/"
-                )}`}
-              />
-              <DetailsItem title="Total Days" content={String(plan.daysCount)} />
-              <DetailsItem title="Destination" content={plan.destination || "-"} />
-              <DetailsItem title="Budget" content={`$${Number(plan.budget || 0)}`} />
-            </InputCardInDetails>
+    <div>
+      <div id="pdf-target">
+        <Navbar
+          navTitle="Details"
+          onShareClick={handleShareClick}
+          onEditClick={handleEditClick}
+          onBackClick={handleBackClick}
+        />
+        <div className={styles.planDetail}>
+          {plan ? (
+            <>
+              <InputCardInDetails
+                cardTitle={plan.name}
+                showAddButton={false}
+                style={{ "--input-label-size": "20px" }}
+              >
+                <DetailsItem
+                  title="Date Range"
+                  content={`${plan.startDate.replaceAll("-", "/")} - ${plan.endDate.replaceAll(
+                    "-",
+                    "/"
+                  )}`}
+                />
+                <DetailsItem title="Total Days" content={String(plan.daysCount)} />
+                <DetailsItem title="Destination" content={plan.destination || "-"} />
+                <DetailsItem title="Budget" content={`$${Number(plan.budget || 0)}`} />
+              </InputCardInDetails>
 
-            {plan.days && plan.days.length > 0 ? (
-              plan.days.map((day, idx) => (
-                <DayPlanCard
-                  key={day.date || idx}
-                  cardTitle={`Day ${String(idx + 1).padStart(2, "0")} - ${day.date}`}
-                >
-                  {(day.events && day.events.length > 0
-                    ? day.events
-                    : [{ time: "", location: "No events", note: "" }]
-                  ).map((ev, i) => (
-                    <DayPlanCardEvent
-                      key={i}
-                      time={ev.time || ""}
-                      event={ev.location || ""}
-                      note={ev.note || ""}
-                    />
-                  ))}
+              {plan.days && plan.days.length > 0 ? (
+                plan.days.map((day, idx) => (
+                  <DayPlanCard
+                    key={day.date || idx}
+                    cardTitle={`Day ${String(idx + 1).padStart(2, "0")} - ${day.date}`}
+                  >
+                    {(day.events && day.events.length > 0
+                      ? day.events
+                      : [{ time: "", location: "No events", note: "" }]
+                    ).map((ev, i) => (
+                      <DayPlanCardEvent
+                        key={i}
+                        time={ev.time || ""}
+                        event={ev.location || ""}
+                        note={ev.note || ""}
+                      />
+                    ))}
+                  </DayPlanCard>
+                ))
+              ) : (
+                <DayPlanCard cardTitle="No days yet">
+                  <DayPlanCardEvent time="" event="Add events when editing" />
                 </DayPlanCard>
-              ))
-            ) : (
-              <DayPlanCard cardTitle="No days yet">
-                <DayPlanCardEvent time="" event="Add events when editing" />
-              </DayPlanCard>
-            )}
-          </>
-        ) : (
-          <>
-            {/* Fallback static content when no planId provided */}
-            <InputCardInDetails
-              cardTitle="Plan Details"
-              showAddButton={false}
-              style={{ "--input-label-size": "20px" }}
-            >
-              <DetailsItem title="Date Range" content="-" />
-              <DetailsItem title="Total Days" content="-" />
-              <DetailsItem title="Destination" content="-" />
-              <DetailsItem title="Budget" content="$0" />
-            </InputCardInDetails>
-          </>
-        )}
+              )}
+            </>
+          ) : (
+            <>
+              {/* Fallback static content when no planId provided */}
+              <InputCardInDetails
+                cardTitle="Plan Details"
+                showAddButton={false}
+                style={{ "--input-label-size": "20px" }}
+              >
+                <DetailsItem title="Date Range" content="-" />
+                <DetailsItem title="Total Days" content="-" />
+                <DetailsItem title="Destination" content="-" />
+                <DetailsItem title="Budget" content="$0" />
+              </InputCardInDetails>
+            </>
+          )}
+        </div>
       </div>
 
       {/* Share Modal */}
       {isShareModalOpen && (
-        <div className={styles.modalOverlay} onClick={handleCloseModal}>
+        <div id="overlay" className={styles.modalOverlay} onClick={handleCloseModal}>
           <div onClick={(e) => e.stopPropagation()}>
-            <PlanShareModal onClose={handleCloseModal} />
+            <PlanShareModal plan={plan} onClose={handleCloseModal} />
           </div>
         </div>
       )}

@@ -20,7 +20,7 @@ export default function Navbar({
   };
 
   return (
-    <nav className={styles.navBarContainer}>
+    <nav className={styles.navBarContainer}  id="nav-for-pdf">
       <div className={styles.navItemLeft}>
         <button onClick={handleBack}>
           <img src={backIcon} alt="go-back-btn" width={20} height={20} />
