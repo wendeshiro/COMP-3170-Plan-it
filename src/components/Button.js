@@ -77,7 +77,7 @@ export const Button = styled.button`
         `}
 
         ${(props) =>
-        props.addPlan &&
+        props.$addPlan &&
         css`
             width: 15.875rem;
             height: 4.375rem;

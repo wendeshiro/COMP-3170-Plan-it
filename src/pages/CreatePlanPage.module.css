@@ -12,6 +12,15 @@
   grid-template-columns: repeat(1, 1fr);
 }
 
+.pickerPortal {
+  position: fixed;
+  z-index: 9999;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  padding: 8px;
+}
+
 .dayCardContainer {
   display: flex;
   flex-direction: column;

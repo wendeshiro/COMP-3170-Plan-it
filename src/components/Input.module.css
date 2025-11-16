@@ -3,7 +3,7 @@
   margin-bottom: 20px;
 }
 
-.label {
+.labelTitle {
   display: block;
   color: #58585d;
   font-size: var(--input-label-size, 25px);
