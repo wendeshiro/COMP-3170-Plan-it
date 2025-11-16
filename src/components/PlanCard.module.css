@@ -36,7 +36,7 @@
   top: 20px;
 }
 
-.dynamicContents {
+/* .dynamicContents {
   position: absolute;
   left: 20px;
   bottom: 20px;
@@ -48,6 +48,14 @@
     border-radius: 50px;
     margin: 2.5px;
   }
+} */
+
+.daysCount {
+  position: absolute;
+  left: 20px;
+  bottom: 23px;
+  font-size: 22px;
+  color: #4062bb;
 }
 
 .detailsSection {
