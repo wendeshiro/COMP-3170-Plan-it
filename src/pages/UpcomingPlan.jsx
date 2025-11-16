@@ -7,6 +7,7 @@ import CreatePlanPage from "./CreatePlanPage";
 import PlanDetail from "./PlanDetail";
 import { useState, useCallback, useMemo } from "react";
 import { Button } from "../components/Button";
+import { getPlans, deletePlansByIds } from "../data/storage";
 
 export default function UpcomingPlan() {
   // rightView values: 'empty' (default click prompt), 'create' (show create page), 'detail' (show plan details)
@@ -14,20 +15,17 @@ export default function UpcomingPlan() {
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [isSelectMode, setIsSelectMode] = useState(false);
   const [selectedPlanIds, setSelectedPlanIds] = useState(new Set());
+  const [selectedPlanId, setSelectedPlanId] = useState(null);
 
   // All plan data object - now as state so we can delete plans
-  const [allPlans, setAllPlans] = useState([
-    { id: 1, planName: "Our 1st Korea Trip", planDate: "2025-10-05 to 2025-10-15", daysCount: 11 },
-    { id: 2, planName: "China Family Trip", planDate: "2025-12-08 to 2025-12-12", daysCount: 5 },
-    { id: 3, planName: "Japan Family Trip", planDate: "2025-12-20 to 2025-12-26", daysCount: 7 },
-  ]);
+  const [allPlans, setAllPlans] = useState(() => getPlans());
 
   // function to compare plan dates
-  const compareDate = (planDate) => {
+  const compareDate = (dateStr) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // set time to 00:00:00 to compare dates only
 
-    const plan = new Date(planDate);
+    const plan = new Date(dateStr);
     plan.setHours(0, 0, 0, 0);
 
     return plan.getTime() - today.getTime();
@@ -38,9 +36,9 @@ export default function UpcomingPlan() {
     if (selectedFilter === "all") {
       return allPlans;
     } else if (selectedFilter === "upcoming") {
-      return allPlans.filter((plan) => compareDate(plan.planDate) >= 0);
+      return allPlans.filter((plan) => compareDate(plan.startDate) >= 0);
     } else if (selectedFilter === "past") {
-      return allPlans.filter((plan) => compareDate(plan.planDate) < 0);
+      return allPlans.filter((plan) => compareDate(plan.startDate) < 0);
     }
     return allPlans;
   }, [selectedFilter, allPlans]);
@@ -53,7 +51,8 @@ export default function UpcomingPlan() {
     setRightView("create");
   }, []);
 
-  const handleSeeDetails = useCallback(() => {
+  const handleSeeDetails = useCallback((planId) => {
+    setSelectedPlanId(planId);
     setRightView("detail");
   }, []);
 
@@ -84,7 +83,8 @@ export default function UpcomingPlan() {
     }
 
     // delete selected plans
-    setAllPlans((prevPlans) => prevPlans.filter((plan) => !selectedPlanIds.has(plan.id)));
+    const next = deletePlansByIds(selectedPlanIds);
+    setAllPlans(next);
 
     // reset selected plan ids and turn off select mode
     setSelectedPlanIds(new Set());
@@ -112,8 +112,8 @@ export default function UpcomingPlan() {
             <PlanCard
               key={plan.id}
               planId={plan.id}
-              planName={plan.planName}
-              planDate={plan.planDate}
+              planName={plan.name}
+              planDate={`${plan.startDate}${plan.endDate ? ` to ${plan.endDate}` : ""}`}
               daysCount={plan.daysCount}
               onSeeDetails={handleSeeDetails}
               selectMode={isSelectMode}
@@ -131,17 +131,26 @@ export default function UpcomingPlan() {
         )}
       </div>
 
-      <div className={styles.addPlanButton}>
-        <AddPlan onClick={handleAddPlanClick} />
-      </div>
+      {rightView !== "create" && (
+        <div className={styles.addPlanButton}>
+          <AddPlan onClick={handleAddPlanClick} />
+        </div>
+      )}
 
       <div className={styles.rightColumnLarge}>
         {rightView === "create" ? (
-          <CreatePlanPage onClose={() => setRightView("empty")} />
+          <CreatePlanPage
+            onClose={() => setRightView("empty")}
+            onSaved={(plan) => {
+              setAllPlans((prev) => [plan, ...prev]);
+            }}
+          />
         ) : rightView === "detail" ? (
-          <PlanDetail onClose={() => setRightView("empty")} />
+          <PlanDetail planId={selectedPlanId} onClose={() => setRightView("empty")} />
         ) : (
-          <div className={styles.clickPrompt}>Click a plan to see details</div>
+          <div className={styles.clickPrompt}>
+            Click a plan card on the left to view its details.
+          </div>
         )}
       </div>
     </div>

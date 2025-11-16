@@ -29,7 +29,7 @@ export default function PlanCard({
       return;
     }
     if (typeof onSeeDetails === "function") {
-      onSeeDetails();
+      onSeeDetails(planId);
       return;
     }
     // fallback behavior for existing apps

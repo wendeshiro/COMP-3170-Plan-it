@@ -9,8 +9,9 @@ import { format, differenceInCalendarDays, addDays } from "date-fns";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
+import { addPlan, generateId } from "../data/storage";
 
-export default function CreatePlanPage({ onClose } = {}) {
+export default function CreatePlanPage({ onClose, onSaved } = {}) {
   const handleBackClick = () => {
     // If parent provided onClose (inline mode), use it to close the right panel.
     if (typeof onClose === "function") {
@@ -32,6 +33,10 @@ export default function CreatePlanPage({ onClose } = {}) {
       key: "selection",
     },
   ]);
+
+  const nameRef = useRef(null);
+  const destinationRef = useRef(null);
+  const budgetRef = useRef(null);
 
   const [showDatePicker, setShowDatePicker] = useState(false);
   const dateInputRef = useRef(null);
@@ -79,12 +84,91 @@ export default function CreatePlanPage({ onClose } = {}) {
   } else if (startDate && !endDate) {
     totalDays = 1;
   }
+  const [dayEvents, setDayEvents] = useState({});
+
+  function handleSave() {
+    const name = nameRef.current?.value?.trim() || "";
+    const destination = destinationRef.current?.value?.trim() || "";
+    const budget = parseFloat(budgetRef.current?.value || "0") || 0;
+    if (!startDate) {
+      alert("Please select a start date.");
+      return;
+    }
+    if (!name) {
+      alert("Please enter the tour name.");
+      return;
+    }
+    if (!destination) {
+      alert("Please enter the destination.");
+      return;
+    }
+    if (budget <= 0) {
+      alert("Please enter a budget.");
+      return;
+    }
+    // Loop through each day to ensure each day has at least one valid event
+    // and that every event has both Location and Start Time filled.
+    // If any check fails, show an alert and stop submission.
+    for (let i = 0; i < Math.max(1, totalDays); i++) {
+      const eventsRaw = dayEvents[i] || [];
+      const filledRows = eventsRaw.filter(
+        (e) => (e.location || "").trim() || (e.time || "").trim() || (e.note || "").trim()
+      );
+      if (filledRows.length === 0) {
+        alert(
+          `Day ${String(i + 1).padStart(2, "0")} needs at least one event (Location & Start Time).`
+        );
+        return;
+      }
+      for (let r = 0; r < filledRows.length; r++) {
+        const row = filledRows[r];
+        if (!(row.location || "").trim() || !(row.time || "").trim()) {
+          alert(
+            `Please fill Location and Start Time for Day ${String(i + 1).padStart(
+              2,
+              "0"
+            )} Location ${String(r + 1).padStart(2, "0")}.`
+          );
+          return;
+        }
+      }
+    }
+
+    const daysArr = Array.from({ length: Math.max(1, totalDays) }).map((_, i) => {
+      const dateStr = format(addDays(startDate, i), "yyyy-MM-dd");
+      const eventsRaw = dayEvents[i] || [];
+      const events = eventsRaw
+        .map((e) => ({
+          time: (e.time || "").trim(),
+          location: (e.location || "").trim(),
+          note: (e.note || "").trim(),
+        }))
+        .filter((e) => (e.time || e.location || e.note) && e.time && e.location);
+      return { date: dateStr, events };
+    });
+
+    const newPlan = {
+      id: generateId(),
+      name,
+      startDate: format(startDate, "yyyy-MM-dd"),
+      endDate: endDate ? format(endDate, "yyyy-MM-dd") : format(startDate, "yyyy-MM-dd"),
+      destination,
+      budget,
+      daysCount: Math.max(1, totalDays),
+      createdAt: new Date().toISOString(),
+      days: daysArr,
+    };
+
+    addPlan(newPlan);
+    if (typeof onSaved === "function") onSaved(newPlan);
+    if (typeof onClose === "function") onClose();
+  }
   return (
     <div>
       <Navbar navTitle="A New Plan" showActions={false} onBackClick={handleBackClick} />
       <div className={styles.contentContainer}>
         <div className={styles.topFormContainer}>
-          <Input title="Tour Name" type="text" />
+          <Input title="Tour Name" type="text" ref={nameRef} />
           <Input
             title="Date Range"
             type="text"
@@ -124,8 +208,8 @@ export default function CreatePlanPage({ onClose } = {}) {
               </div>,
               document.body
             )}
-          <Input title="Destination" type="text" />
-          <Input title="Budget" type="number" showDollar min={0} />
+          <Input title="Destination" type="text" ref={destinationRef} />
+          <Input title="Budget" type="number" showDollar min={0} ref={budgetRef} />
         </div>
         <div className={styles.dayCardContainer}>
           {Array.from({ length: Math.max(1, totalDays) }).map((_, i) => {
@@ -138,6 +222,12 @@ export default function CreatePlanPage({ onClose } = {}) {
                 cardTitle={cardTitle}
                 initialEntries={1}
                 dateValue={defaultDateValue}
+                onChange={(events) =>
+                  setDayEvents((prev) => ({
+                    ...prev,
+                    [i]: events.map((e) => ({ ...e, date: defaultDateValue })),
+                  }))
+                }
               />
             );
           })}
@@ -151,12 +241,7 @@ export default function CreatePlanPage({ onClose } = {}) {
           >
             Cancel
           </Button>
-          <Button
-            $savePlan
-            onClick={() => {
-              if (typeof onClose === "function") onClose();
-            }}
-          >
+          <Button $savePlan onClick={handleSave}>
             Save
           </Button>
         </div>
