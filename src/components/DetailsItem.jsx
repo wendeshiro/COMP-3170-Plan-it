@@ -5,7 +5,7 @@ export default function DetailsItem({ title, content }) {
     <div>
       <div className={styles.itemContainer}>
         <p className={styles.label}>{title}</p>
-        <p className={styles.content}>{content}</p>
+        <div className={styles.content}>{content}</div>
       </div>
     </div>
   );
