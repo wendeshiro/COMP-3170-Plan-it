@@ -8,6 +8,8 @@ import DetailsItem from "../components/DetailsItem";
 import DayPlanCard from "../components/DayPlanCard";
 import DayPlanCardEvent from "../components/DayPlanCardEvent";
 import { Button } from "../components/Button";
+import addIcon from "../assets/add-day-plus-btn.svg";
+import removeIcon from "../assets/day-minus-btn.svg";
 import styles from "./EditPlanPage.module.css";
 import { getPlanById, savePlans, getPlans } from "../data/storage";
 
@@ -251,31 +253,38 @@ export default function EditPlanPage({ planId, onSave, onCancel }) {
                     />
                     {!isLast && (
                       <div className={styles.eventDeleteWrapper}>
-                        <Button
-                          redSmall
-                          onClick={() => removeEventRow(dayIndex, eventIndex)}
-                          disabled={events.length <= 1}
-                        >
-                          Delete
-                        </Button>
+                        {(events || []).length > 1 && (
+                          <button
+                            className={styles.removeIconButton}
+                            onClick={() => removeEventRow(dayIndex, eventIndex)}
+                            aria-label="Remove event"
+                          >
+                            <img src={removeIcon} alt="remove" />
+                          </button>
+                        )}
                       </div>
                     )}
                   </div>
                 );
               })}
               <div className={styles.actionsRow}>
-                <Button $savePlan onClick={() => addEventRow(dayIndex)}>
-                  Add Event
-                </Button>
+                <button
+                  className={styles.addIconButton}
+                  onClick={() => addEventRow(dayIndex)}
+                  aria-label="Add event"
+                >
+                  <img src={addIcon} alt="add" />
+                </button>
                 {(day.events || []).length > 1 && (
-                  <Button
-                    redSmall
+                  <button
+                    className={styles.removeIconButton}
                     onClick={() =>
                       removeEventRow(dayIndex, (day.events || []).length - 1)
                     }
+                    aria-label="Remove last event"
                   >
-                    Delete
-                  </Button>
+                    <img src={removeIcon} alt="remove" />
+                  </button>
                 )}
               </div>
             </DayPlanCard>
