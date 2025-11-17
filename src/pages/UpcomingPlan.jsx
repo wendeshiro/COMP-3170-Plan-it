@@ -5,33 +5,34 @@ import Dropdown from "../components/Dropdown";
 import styles from "./UpcomingPlan.module.css";
 import CreatePlanPage from "./CreatePlanPage";
 import PlanDetail from "./PlanDetail";
+import EditPlanPage from "./EditPlanPage";
 import { useState, useCallback, useMemo } from "react";
 import { Button } from "../components/Button";
 import { getPlans, deletePlansByIds } from "../data/storage";
 
 export default function UpcomingPlan() {
-  // rightView values: 'empty' (default click prompt), 'create' (show create page), 'detail' (show plan details)
   const [rightView, setRightView] = useState("empty");
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [isSelectMode, setIsSelectMode] = useState(false);
   const [selectedPlanIds, setSelectedPlanIds] = useState(new Set());
   const [selectedPlanId, setSelectedPlanId] = useState(null);
 
-  // All plan data object - now as state so we can delete plans
+  // Hold allPlans in state so UI refreshes on update
   const [allPlans, setAllPlans] = useState(() => getPlans());
 
-  // function to compare plan dates
+  // Reload plans after a detail save
+  const reloadPlans = useCallback(() => {
+    setAllPlans(getPlans());
+  }, []);
+
   const compareDate = (dateStr) => {
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // set time to 00:00:00 to compare dates only
-
+    today.setHours(0, 0, 0, 0);
     const plan = new Date(dateStr);
     plan.setHours(0, 0, 0, 0);
-
     return plan.getTime() - today.getTime();
   };
 
-  // filtered plans list
   const filteredPlans = useMemo(() => {
     if (selectedFilter === "all") {
       return allPlans;
@@ -58,7 +59,6 @@ export default function UpcomingPlan() {
 
   const handleSelectClick = useCallback(() => {
     setIsSelectMode((prev) => !prev);
-    // Select mode off, reset selected plan ids
     if (isSelectMode) {
       setSelectedPlanIds(new Set());
     }
@@ -81,12 +81,8 @@ export default function UpcomingPlan() {
       alert("Please select at least one plan to delete.");
       return;
     }
-
-    // delete selected plans
     const next = deletePlansByIds(selectedPlanIds);
     setAllPlans(next);
-
-    // reset selected plan ids and turn off select mode
     setSelectedPlanIds(new Set());
     setIsSelectMode(false);
   }, [selectedPlanIds]);
@@ -100,7 +96,10 @@ export default function UpcomingPlan() {
       <div className={styles.upcomingPlanContainer}>
         <div className={styles.dropdownSelect}>
           <div className={styles.dropdown}>
-            <Dropdown onFilterChange={handleFilterChange} selectedFilter={selectedFilter} />
+            <Dropdown
+              onFilterChange={handleFilterChange}
+              selectedFilter={selectedFilter}
+            />
           </div>
           <button className={styles.selectButton} onClick={handleSelectClick}>
             {isSelectMode ? "Cancel" : "Select"}
@@ -113,7 +112,9 @@ export default function UpcomingPlan() {
               key={plan.id}
               planId={plan.id}
               planName={plan.name}
-              planDate={`${plan.startDate}${plan.endDate ? ` to ${plan.endDate}` : ""}`}
+              planDate={`${plan.startDate}${
+                plan.endDate ? ` to ${plan.endDate}` : ""
+              }`}
               daysCount={plan.daysCount}
               onSeeDetails={handleSeeDetails}
               selectMode={isSelectMode}
@@ -146,7 +147,22 @@ export default function UpcomingPlan() {
             }}
           />
         ) : rightView === "detail" ? (
-          <PlanDetail planId={selectedPlanId} onClose={() => setRightView("empty")} />
+          <PlanDetail
+            planId={selectedPlanId}
+            onClose={() => setRightView("empty")}
+            onEdit={() => setRightView("edit")}
+            onSaveSuccess={reloadPlans}
+          />
+        ) : rightView === "edit" ? (
+          <EditPlanPage
+            planId={selectedPlanId}
+            onCancel={() => setRightView("detail")}
+            onSave={(updatedPlan) => {
+              // refresh list and go back to detail view
+              setAllPlans(getPlans());
+              setRightView("detail");
+            }}
+          />
         ) : (
           <div className={styles.clickPrompt}>
             Click a plan card on the left to view its details.
