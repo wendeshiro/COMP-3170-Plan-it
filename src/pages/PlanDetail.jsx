@@ -9,7 +9,7 @@ import Navbar from "../components/Navbar";
 import styles from "./PlanDetail.module.css";
 import { getPlanById } from "../data/storage";
 
-export default function PlanDetail({ planId, onClose } = {}) {
+export default function PlanDetail({ planId, onClose, onEditClick } = {}) {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -27,7 +27,11 @@ export default function PlanDetail({ planId, onClose } = {}) {
   };
 
   const handleEditClick = () => {
-    console.log("Edit button clicked!");
+    if (onEditClick) {
+      onEditClick();
+    } else {
+      console.log("Edit button clicked!");
+    }
   };
 
   const handleBackClick = () => {

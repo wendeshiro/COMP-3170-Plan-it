@@ -4,6 +4,7 @@ import AddPlan from "../components/AddPlan";
 import Dropdown from "../components/Dropdown";
 import styles from "./UpcomingPlan.module.css";
 import CreatePlanPage from "./CreatePlanPage";
+import EditPlanPage from "./EditPlanPage";
 import PlanDetail from "./PlanDetail";
 import { useState, useCallback, useMemo } from "react";
 import { Button } from "../components/Button";
@@ -49,6 +50,10 @@ export default function UpcomingPlan() {
 
   const handleAddPlanClick = useCallback(() => {
     setRightView("create");
+  }, []);
+
+  const handleEditPlan = useCallback(() => {
+    setRightView("edit");
   }, []);
 
   const handleSeeDetails = useCallback((planId) => {
@@ -131,7 +136,7 @@ export default function UpcomingPlan() {
         )}
       </div>
 
-      {rightView !== "create" && (
+      {rightView !== "create" && rightView !== "edit" && (
         <div className={styles.addPlanButton}>
           <AddPlan onClick={handleAddPlanClick} />
         </div>
@@ -143,10 +148,24 @@ export default function UpcomingPlan() {
             onClose={() => setRightView("empty")}
             onSaved={(plan) => {
               setAllPlans((prev) => [plan, ...prev]);
+              setRightView("empty");
+            }}
+          />
+        ) : rightView === "edit" ? (
+          <EditPlanPage
+            plan={allPlans.find((p) => p.id === selectedPlanId)}
+            onClose={() => setRightView("detail")}
+            onSaved={(updatedPlan) => {
+              setAllPlans((prev) => prev.map((p) => (p.id === updatedPlan.id ? updatedPlan : p)));
+              setRightView("detail");
             }}
           />
         ) : rightView === "detail" ? (
-          <PlanDetail planId={selectedPlanId} onClose={() => setRightView("empty")} />
+          <PlanDetail
+            planId={selectedPlanId}
+            onClose={() => setRightView("empty")}
+            onEditClick={handleEditPlan}
+          />
         ) : (
           <div className={styles.clickPrompt}>
             Click a plan card on the left to view its details.
