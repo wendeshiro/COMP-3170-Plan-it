@@ -1,8 +1,8 @@
 .pageContainer {
-  padding: 20px 40px;
+  padding: 20px 30px;
 }
 
-.topHeader {
+/* .topHeader {
   grid-column: 1/3;
   grid-row: 1/2;
   display: grid;
@@ -27,7 +27,7 @@
   grid-column: 3/4;
   justify-self: end;
   align-self: center;
-}
+} */
 
 .checklistContainer {
   padding: 10px 0;

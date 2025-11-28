@@ -1,16 +1,13 @@
-import logo from "../assets/plan-it_logo.png";
 import PlanCard from "../components/PlanCard";
-import AddPlan from "../components/AddPlan";
 import Dropdown from "../components/Dropdown";
 import styles from "./UpcomingPlan.module.css";
 import CreatePlanPage from "./CreatePlanPage";
 import EditPlanPage from "./EditPlanPage";
 import PlanDetail from "./PlanDetail";
 import { useState, useCallback, useMemo, useEffect } from "react";
-import { useLocation as useRouterLocation, useNavigate } from "react-router-dom";
+import { useLocation as useRouterLocation, useNavigate, useOutletContext } from "react-router-dom";
 import { Button } from "../components/Button";
 import { getPlans, deletePlansByIds } from "../data/storage";
-import PageNavBar from "../components/PageNavBar";
 
 export default function UpcomingPlan() {
   // rightView values: 'empty' (default click prompt), 'create' (show create page), 'detail' (show plan details)
@@ -20,8 +17,7 @@ export default function UpcomingPlan() {
   const [selectedPlanIds, setSelectedPlanIds] = useState(new Set());
   const [selectedPlanId, setSelectedPlanId] = useState(null);
 
-  // Location state
-  const [location, setLocation] = useState(null);
+  const { setIsAddPlanDisabled } = useOutletContext();
 
   // read router location state (e.g. to open create view when navigated here)
   const routerLocation = useRouterLocation();
@@ -41,28 +37,8 @@ export default function UpcomingPlan() {
   }, [routerLocation, routerNavigate]);
 
   useEffect(() => {
-    if (!navigator.geolocation) {
-      return;
-    }
-
-    const watchId = navigator.geolocation.watchPosition(
-      (position) => {
-        setLocation(position);
-      },
-      (err) => {
-        console.error(err.message);
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
-      }
-    );
-
-    return () => {
-      navigator.geolocation.clearWatch(watchId);
-    };
-  }, []);
+    setIsAddPlanDisabled(rightView === "create" || rightView === "edit");
+  }, [rightView, setIsAddPlanDisabled]);
 
   // All plan data object - now as state so we can delete plans
   const [allPlans, setAllPlans] = useState(() => getPlans());
@@ -144,19 +120,6 @@ export default function UpcomingPlan() {
 
   return (
     <div className={styles.upcomingPlan}>
-      <div className={styles.topHeader}>
-        <div className={styles.planItLogo}>
-          <img src={logo} alt="Plan It Logo" />
-        </div>
-        <PageNavBar className={styles.pageNavBar} location={location} />
-        <div className={styles.addPlanButton}>
-          <AddPlan
-            onClick={handleAddPlanClick}
-            disabled={rightView === "create" || rightView === "edit"}
-          />
-        </div>
-      </div>
-
       <div className={styles.upcomingPlanContainer}>
         <div className={styles.dropdownSelect}>
           <div className={styles.dropdown}>

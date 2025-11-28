@@ -1,4 +1,3 @@
-import React from "react";
 import { parseISO, differenceInCalendarDays } from "date-fns";
 import styles from "./PlanCard.module.css";
 import member1 from "../assets/member1.jpeg";

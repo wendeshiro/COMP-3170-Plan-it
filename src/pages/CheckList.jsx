@@ -1,9 +1,6 @@
-import PageNavBar from "../components/PageNavBar";
-import AddPlan from "../components/AddPlan";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import styles from "./CheckList.module.css";
-import logo from "../assets/plan-it_logo.png";
 
 const checklistData = [
   {
@@ -109,11 +106,6 @@ export default function CheckList() {
   const navigate = useNavigate();
   const [checkedItems, setCheckedItems] = useState({});
 
-  const handleAddClick = () => {
-    // navigate to the main Plans page and request the create pane
-    navigate("/", { state: { rightView: "create" } });
-  };
-
   const toggleCheck = (item) => {
     setCheckedItems((prev) => ({
       ...prev,
@@ -123,15 +115,6 @@ export default function CheckList() {
 
   return (
     <div className={styles.pageContainer}>
-      <div className={styles.topHeader}>
-        <div className={styles.planItLogo}>
-          <img src={logo} alt="Plan It Logo" />
-        </div>
-        <PageNavBar className={styles.pageNavBar} location={location} />
-        <div className={styles.addPlanButton}>
-          <AddPlan onClick={handleAddClick} />
-        </div>
-      </div>
       <div className={styles.checklistContainer}>
         <p className={styles.title}>Ready for Your Trip?</p>
         <div className={styles.listGrid}>

@@ -1,0 +1,26 @@
+.topHeader {
+  display: grid;
+  grid-template-columns: 200px 1fr 290px;
+  height: 120px;
+  align-items: center;
+  padding: 20px 30px 0; /* Match the padding from UpcomingPlan */
+}
+
+.planItLogo {
+  grid-column: 1/2;
+  justify-self: start;
+  align-self: center;
+  margin-bottom: 0px;
+}
+
+.pageNavBar {
+  grid-column: 2/3;
+  justify-self: center;
+  align-self: center;
+}
+
+.addPlanButton {
+  grid-column: 3/4;
+  justify-self: end;
+  align-self: center;
+}
