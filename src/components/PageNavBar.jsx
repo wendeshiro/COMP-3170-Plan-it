@@ -78,7 +78,6 @@ export default function PageNavBar({ location }) {
     return () => {
       if (debounceRef.current) clearTimeout(debounceRef.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   // Map open-meteo weather codes to descriptions + emoji

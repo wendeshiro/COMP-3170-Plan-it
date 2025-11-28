@@ -2,9 +2,9 @@
 import { Button } from "./Button";
 import plusIcon from "../assets/plus.svg";
 
-export default function CreatePlanButton({ onClick }) {
+export default function CreatePlanButton({ onClick, disabled = false }) {
   return (
-    <Button $addPlan onClick={onClick}>
+    <Button $addPlan onClick={disabled ? undefined : onClick} disabled={disabled}>
       <img src={plusIcon} alt="plus" style={{ width: "20px", marginRight: "10px" }} />
       Create a plan
     </Button>

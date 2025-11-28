@@ -7,6 +7,7 @@ import CreatePlanPage from "./CreatePlanPage";
 import EditPlanPage from "./EditPlanPage";
 import PlanDetail from "./PlanDetail";
 import { useState, useCallback, useMemo, useEffect } from "react";
+import { useLocation as useRouterLocation, useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import { getPlans, deletePlansByIds } from "../data/storage";
 import PageNavBar from "../components/PageNavBar";
@@ -21,6 +22,23 @@ export default function UpcomingPlan() {
 
   // Location state
   const [location, setLocation] = useState(null);
+
+  // read router location state (e.g. to open create view when navigated here)
+  const routerLocation = useRouterLocation();
+  const routerNavigate = useNavigate();
+
+  useEffect(() => {
+    if (routerLocation && routerLocation.state && routerLocation.state.rightView) {
+      setRightView(routerLocation.state.rightView);
+      // clear the navigation state so a page refresh doesn't re-open the pane
+      try {
+        routerNavigate(routerLocation.pathname, { replace: true, state: {} });
+      } catch (e) {
+        // ignore navigation errors
+      }
+    }
+    // we only want to run this on initial mount / when routerLocation changes
+  }, [routerLocation, routerNavigate]);
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -131,11 +149,12 @@ export default function UpcomingPlan() {
           <img src={logo} alt="Plan It Logo" />
         </div>
         <PageNavBar className={styles.pageNavBar} location={location} />
-        {rightView !== "create" && rightView !== "edit" && (
-          <div className={styles.addPlanButton}>
-            <AddPlan onClick={handleAddPlanClick} />
-          </div>
-        )}
+        <div className={styles.addPlanButton}>
+          <AddPlan
+            onClick={handleAddPlanClick}
+            disabled={rightView === "create" || rightView === "edit"}
+          />
+        </div>
       </div>
 
       <div className={styles.upcomingPlanContainer}>

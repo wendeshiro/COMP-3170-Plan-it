@@ -78,6 +78,7 @@
   grid-row: 2/3;
   background-color: #ffffff;
   border-radius: 20px;
+  overflow: auto;
 }
 
 .clickPrompt {
