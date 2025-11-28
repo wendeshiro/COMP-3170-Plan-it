@@ -87,19 +87,19 @@ export default function PageNavBar({ location }) {
     if (Number.isNaN(c)) return { desc: "--", emoji: "❓" };
 
     const mapping = [
-      { codes: [0], desc: "Clear sky", emoji: "☀️" },
-      { codes: [1], desc: "Mainly clear", emoji: "🌤️" },
-      { codes: [2], desc: "Partly cloudy", emoji: "⛅" },
+      { codes: [0], desc: "Clear Sky", emoji: "☀️" },
+      { codes: [1], desc: "Mainly Clear", emoji: "🌤️" },
+      { codes: [2], desc: "Partly Cloudy", emoji: "⛅" },
       { codes: [3], desc: "Overcast", emoji: "☁️" },
       { codes: [45, 48], desc: "Fog", emoji: "🌫️" },
       { codes: [51, 53, 55, 56, 57], desc: "Drizzle", emoji: "🌦️" },
       { codes: [61, 63, 65, 66, 67], desc: "Rain", emoji: "🌧️" },
-      { codes: [71, 73, 75], desc: "Snow fall", emoji: "❄️" },
-      { codes: [77], desc: "Snow grains", emoji: "❄️" },
-      { codes: [80, 81, 82], desc: "Rain showers", emoji: "🌧️" },
-      { codes: [85, 86], desc: "Snow showers", emoji: "❄️" },
+      { codes: [71, 73, 75], desc: "Snow Fall", emoji: "❄️" },
+      { codes: [77], desc: "Snow Grains", emoji: "❄️" },
+      { codes: [80, 81, 82], desc: "Rain Showers", emoji: "🌧️" },
+      { codes: [85, 86], desc: "Snow Showers", emoji: "❄️" },
       { codes: [95], desc: "Thunderstorm", emoji: "⛈️" },
-      { codes: [96, 99], desc: "Thunderstorm with hail", emoji: "⛈️🧊" },
+      { codes: [96, 99], desc: "Thunderstorm with Hail", emoji: "⛈️🧊" },
     ];
 
     for (const g of mapping) {
