@@ -60,11 +60,7 @@ export default function PlanDetail({ planId, onClose, onEditClick } = {}) {
         <div className={styles.planDetail}>
           {plan ? (
             <>
-              <InputCardInDetails
-                cardTitle={plan.name}
-                showAddButton={false}
-                style={{ "--input-label-size": "20px" }}
-              >
+              <InputCardInDetails cardTitle={plan.name} showAddButton={false}>
                 <DetailsItem
                   title="Date Range"
                   content={`${plan.startDate.replaceAll("-", "/")} - ${plan.endDate.replaceAll(

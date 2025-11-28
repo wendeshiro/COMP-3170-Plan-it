@@ -174,6 +174,7 @@ export default function UpcomingPlan() {
               planId={plan.id}
               planName={plan.name}
               planDate={`${plan.startDate}${plan.endDate ? ` to ${plan.endDate}` : ""}`}
+              startDate={plan.startDate}
               daysCount={plan.daysCount}
               onSeeDetails={handleSeeDetails}
               selectMode={isSelectMode}

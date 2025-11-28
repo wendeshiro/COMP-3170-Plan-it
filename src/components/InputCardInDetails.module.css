@@ -3,11 +3,12 @@
   border-radius: 30px;
   width: 420px;
   height: auto;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   padding: 25px;
+  overflow: hidden;
 }
 
 .cardTitle {
@@ -41,6 +42,10 @@
     width: 100%;
     background-color: #f7f4f0;
     padding: 32px 80px;
+  }
+  .inputCardContent {
+    max-width: 740px;
+    margin: 0 auto;
   }
 
   .childContent {

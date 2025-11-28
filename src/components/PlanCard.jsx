@@ -1,4 +1,5 @@
 import React from "react";
+import { parseISO, differenceInCalendarDays } from "date-fns";
 import styles from "./PlanCard.module.css";
 import member1 from "../assets/member1.jpeg";
 import member2 from "../assets/member2.jpeg";
@@ -10,6 +11,7 @@ export default function PlanCard({
   planId,
   planName,
   planDate,
+  startDate,
   daysCount,
   onSeeDetails,
   selectMode = false,
@@ -21,6 +23,12 @@ export default function PlanCard({
       onCheckChange(planId, !isChecked);
     }
   };
+
+  const daysUntilStart = startDate
+    ? differenceInCalendarDays(parseISO(startDate), new Date())
+    : null;
+
+  const isFuture = daysUntilStart !== null && daysUntilStart > 0;
 
   const handleSeeDetailsClick = () => {
     if (selectMode) {
@@ -53,7 +61,13 @@ export default function PlanCard({
           <img src={member2} alt="member2" />
           <img src={member3} alt="member3" />
         </div> */}
-        <div className={styles.daysCount}>{daysCount} Days</div>
+        {/* <div className={styles.daysCount}>{isFuture && `Only\n${daysUntilStart} days to go`}</div> */}
+        {isFuture && (
+          <div className={styles.daysCount}>
+            <div className={styles.daysCountSmall}>Departure in</div>
+            <div>{daysUntilStart} Days</div>
+          </div>
+        )}
         <div
           className={styles.detailsSection}
           onClick={handleSeeDetailsClick}
