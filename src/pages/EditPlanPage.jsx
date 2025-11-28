@@ -1,301 +1,251 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import styles from "./CreatePlanPage.module.css";
 import Navbar from "../components/Navbar";
 import Input from "../components/Input";
 import InputCard from "../components/InputCard";
-import InputCardInDetails from "../components/InputCardInDetails";
-import DetailsItem from "../components/DetailsItem";
-import DayPlanCard from "../components/DayPlanCard";
-import DayPlanCardEvent from "../components/DayPlanCardEvent";
 import { Button } from "../components/Button";
-import addIcon from "../assets/add-day-plus-btn.svg";
-import removeIcon from "../assets/day-minus-btn.svg";
-import styles from "./EditPlanPage.module.css";
-import { getPlanById, savePlans, getPlans } from "../data/storage";
+import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
+import { format, differenceInCalendarDays, addDays, parseISO } from "date-fns";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { DateRange } from "react-date-range";
+import { updatePlan } from "../data/storage";
 
-export default function EditPlanPage({ planId, onSave, onCancel }) {
-  const navigate = useNavigate();
-  const [planData, setPlanData] = useState(null);
-  const [formState, setFormState] = useState(null);
+export default function EditPlanPage({ plan, onClose, onSaved } = {}) {
+  const handleBackClick = () => {
+    if (typeof onClose === "function") {
+      onClose();
+    }
+  };
+
+  const [state, setState] = useState([
+    {
+      startDate: plan ? parseISO(plan.startDate) : new Date(),
+      endDate: plan ? parseISO(plan.endDate) : null,
+      key: "selection",
+    },
+  ]);
+
+  const nameRef = useRef(null);
+  const destinationRef = useRef(null);
+  const budgetRef = useRef(null);
+
+  // Initialize refs
+  useEffect(() => {
+    if (plan) {
+      if (nameRef.current) nameRef.current.value = plan.name || "";
+      if (destinationRef.current) destinationRef.current.value = plan.destination || "";
+      if (budgetRef.current) budgetRef.current.value = plan.budget || "";
+    }
+  }, [plan]);
+
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const dateInputRef = useRef(null);
+  const pickerRef = useRef(null);
+  const PICKER_WIDTH = 360;
 
   useEffect(() => {
-    if (!planId) {
-      if (typeof onCancel === "function") {
-        onCancel();
-        return;
+    function handleOutside(e) {
+      const target = e.target;
+      if (
+        pickerRef.current &&
+        !pickerRef.current.contains(target) &&
+        dateInputRef.current &&
+        !dateInputRef.current.contains(target)
+      ) {
+        setShowDatePicker(false);
       }
-      navigate("/");
-      return;
     }
-    const plan = getPlanById(planId);
-    if (plan) {
-      setPlanData(plan);
-      setFormState({
-        title: plan.name || "",
-        budget: plan.budget || 0,
-        // Ensure each day has its own events array and at least one placeholder event
-        days: plan.days.map((day) => ({
-          ...day,
-          events:
-            day.events && day.events.length > 0
-              ? day.events.map((ev) => ({ ...ev }))
-              : [{ time: "", location: "", note: "" }],
-        })),
-        destination: plan.destination || "",
-        dateRange: `${plan.startDate.replaceAll(
-          "-",
-          "/"
-        )} - ${plan.endDate.replaceAll("-", "/")}`,
-      });
-    }
-  }, [planId, navigate, onCancel]);
+    if (showDatePicker) document.addEventListener("mousedown", handleOutside);
+    return () => document.removeEventListener("mousedown", handleOutside);
+  }, [showDatePicker]);
 
-  if (!formState) return <div>Loading...</div>;
+  const [pickerPos, setPickerPos] = useState({ top: 0, left: 0 });
 
-  function handleTitleChange(value) {
-    setFormState((prev) => ({ ...prev, title: value }));
+  function openPicker() {
+    const el = dateInputRef.current;
+    if (!el) return setShowDatePicker(true);
+    const rect = el.getBoundingClientRect();
+    const top = rect.top;
+    let left = rect.left - PICKER_WIDTH - 8;
+    if (left < 8) left = 8;
+    setPickerPos({ top: Math.max(8, top), left });
+    setShowDatePicker(true);
   }
 
-  function handleBudgetChange(value) {
-    setFormState((prev) => ({ ...prev, budget: Number(value) }));
+  const startDate = state && state[0] && state[0].startDate ? state[0].startDate : null;
+  const endDate = state && state[0] && state[0].endDate ? state[0].endDate : null;
+  let totalDays = 0;
+  if (startDate && endDate) {
+    totalDays = differenceInCalendarDays(endDate, startDate) + 1;
+    if (totalDays < 1) totalDays = 1;
+  } else if (startDate && !endDate) {
+    totalDays = 1;
   }
 
-  function handleEventChange(dayIndex, eventIndex, field, value) {
-    setFormState((prev) => ({
-      ...prev,
-      days: prev.days.map((d, i) =>
-        i === dayIndex
-          ? {
-              ...d,
-              events: (d.events || []).map((ev, ei) =>
-                ei === eventIndex ? { ...ev, [field]: value } : ev
-              ),
-            }
-          : d
-      ),
-    }));
-  }
-
-  function addEventRow(dayIndex) {
-    setFormState((prev) => ({
-      ...prev,
-      days: prev.days.map((d, i) => {
-        if (i !== dayIndex) return d;
-        const events = d.events || [];
-        const last = events[events.length - 1];
-        if (
-          last &&
-          last.time === "" &&
-          (last.location === "" || last.location === undefined) &&
-          (last.note === "" || last.note === undefined)
-        ) {
-          return d; // don't add another empty row for this day
-        }
-        return {
-          ...d,
-          events: [...events, { time: "", location: "", note: "" }],
-        };
-      }),
-    }));
-  }
-
-  function removeEventRow(dayIndex, eventIndex) {
-    setFormState((prev) => ({
-      ...prev,
-      days: prev.days.map((d, i) => {
-        if (i !== dayIndex) return d;
-        const events = (d.events || []).slice();
-        if (events.length <= 1) return d; // don't allow removing the last event
-        events.splice(eventIndex, 1);
-        return { ...d, events };
-      }),
-    }));
-  }
+  // Initialize dayEvents from plan
+  const [dayEvents, setDayEvents] = useState(() => {
+    if (!plan || !plan.days) return {};
+    const events = {};
+    plan.days.forEach((day, index) => {
+      events[index] = day.events;
+    });
+    return events;
+  });
 
   function handleSave() {
-    // Debug: inspect formState before saving
-    // eslint-disable-next-line no-console
-    console.log("DEBUG: formState before save", {
-      title: formState.title,
-      budget: formState.budget,
-      days: formState.days,
-    });
+    const name = nameRef.current?.value?.trim() || "";
+    const destination = destinationRef.current?.value?.trim() || "";
+    const budget = parseFloat(budgetRef.current?.value || "0") || 0;
+    if (!startDate) {
+      alert("Please select a start date.");
+      return;
+    }
+    if (!name) {
+      alert("Please enter the tour name.");
+      return;
+    }
+    if (!destination) {
+      alert("Please enter the destination.");
+      return;
+    }
+    if (budget <= 0) {
+      alert("Please enter a budget.");
+      return;
+    }
 
-    // Sort events by time (HH:mm) for each day before saving.
-    const parseTimeToMinutes = (t) => {
-      if (!t || typeof t !== "string") return Infinity;
-      const m = t.match(/^(\d{1,2}):(\d{2})$/);
-      if (!m) return Infinity;
-      const hh = Number(m[1]);
-      const mm = Number(m[2]);
-      if (Number.isNaN(hh) || Number.isNaN(mm)) return Infinity;
-      return hh * 60 + mm;
-    };
-
-    const sortedDays = formState.days.map((d) => {
-      const evs = Array.isArray(d.events) ? [...d.events] : [];
-      evs.sort(
-        (a, b) => parseTimeToMinutes(a.time) - parseTimeToMinutes(b.time)
+    for (let i = 0; i < Math.max(1, totalDays); i++) {
+      const eventsRaw = dayEvents[i] || [];
+      const filledRows = eventsRaw.filter(
+        (e) => (e.location || "").trim() || (e.time || "").trim() || (e.note || "").trim()
       );
-      return { ...d, events: evs };
-    });
+      if (filledRows.length === 0) {
+        alert(
+          `Day ${String(i + 1).padStart(2, "0")} needs at least one event (Location & Start Time).`
+        );
+        return;
+      }
+      for (let r = 0; r < filledRows.length; r++) {
+        const row = filledRows[r];
+        if (!(row.location || "").trim() || !(row.time || "").trim()) {
+          alert(
+            `Please fill Location and Start Time for Day ${String(i + 1).padStart(
+              2,
+              "0"
+            )} Location ${String(r + 1).padStart(2, "0")}.`
+          );
+          return;
+        }
+      }
+    }
 
-    // Update formState so UI reflects the sorted order if the user stays on page
-    setFormState((prev) => ({ ...prev, days: sortedDays }));
+    const daysArr = Array.from({ length: Math.max(1, totalDays) }).map((_, i) => {
+      const dateStr = format(addDays(startDate, i), "yyyy-MM-dd");
+      const eventsRaw = dayEvents[i] || [];
+      const events = eventsRaw
+        .map((e) => ({
+          time: (e.time || "").trim(),
+          location: (e.location || "").trim(),
+          note: (e.note || "").trim(),
+        }))
+        .filter((e) => (e.time || e.location || e.note) && e.time && e.location);
+      return { date: dateStr, events };
+    });
 
     const updatedPlan = {
-      ...planData,
-      name: formState.title,
-      budget: formState.budget,
-      days: sortedDays,
-      destination: formState.destination,
+      ...plan, // Keep existing ID and createdAt
+      name,
+      startDate: format(startDate, "yyyy-MM-dd"),
+      endDate: endDate ? format(endDate, "yyyy-MM-dd") : format(startDate, "yyyy-MM-dd"),
+      destination,
+      budget,
+      daysCount: Math.max(1, totalDays),
+      days: daysArr,
     };
-    // eslint-disable-next-line no-console
-    console.log("DEBUG: updatedPlan to save", updatedPlan);
-    const allPlans = getPlans();
-    const updatedPlans = allPlans.map((p) =>
-      p.id === updatedPlan.id ? updatedPlan : p
-    );
 
-    savePlans(updatedPlans);
-    if (typeof onSave === "function") {
-      onSave(updatedPlan);
-    } else {
-      navigate(`/plan-detail/${planId}`);
-    }
+    updatePlan(updatedPlan);
+    if (typeof onSaved === "function") onSaved(updatedPlan);
+    if (typeof onClose === "function") onClose();
   }
 
   return (
     <div>
-      <Navbar
-        navTitle="Edit Plan"
-        onBackClick={() => {
-          if (typeof onCancel === "function") return onCancel();
-          navigate(`/plan-detail/${planId}`);
-        }}
-      />
+      <Navbar navTitle="Edit Plan" showActions={false} onBackClick={handleBackClick} />
       <div className={styles.contentContainer}>
-        <InputCardInDetails
-          cardTitle={
-            <Input
-              title="Trip Title"
-              type="text"
-              value={formState.title}
-              onChange={(e) => handleTitleChange(e.target.value)}
-            />
-          }
-          showAddButton={false}
-          style={{ "--input-label-size": "20px" }}
-        >
-          <DetailsItem
+        <div className={styles.topFormContainer}>
+          <Input title="Tour Name" type="text" ref={nameRef} />
+          <Input
             title="Date Range"
-            content={<input type="text" value={formState.dateRange} disabled />}
-          />
-          <DetailsItem
-            title="Total Days"
-            content={
-              <input type="number" value={formState.days.length} disabled />
+            type="text"
+            ref={dateInputRef}
+            onClick={openPicker}
+            readOnly
+            value={
+              state[0].startDate
+                ? `${format(state[0].startDate, "yyyy-MM-dd")}${
+                    state[0].endDate ? " to " + format(state[0].endDate, "yyyy-MM-dd") : ""
+                  }`
+                : ""
             }
           />
-          <DetailsItem
-            title="Destination"
-            content={
-              <input
-                type="text"
-                value={formState.destination}
-                onChange={(e) =>
-                  setFormState((prev) => ({
+
+          {showDatePicker &&
+            createPortal(
+              <div
+                ref={pickerRef}
+                className={styles.pickerPortal}
+                style={{
+                  top: pickerPos.top + "px",
+                  left: pickerPos.left + "px",
+                  width: PICKER_WIDTH + "px",
+                }}
+              >
+                <DateRange
+                  minDate={new Date()}
+                  maxDate={new Date(new Date().setFullYear(new Date().getFullYear() + 3))}
+                  editableDateInputs={true}
+                  onChange={(item) => {
+                    setState([item.selection]);
+                  }}
+                  moveRangeOnFirstSelection={false}
+                  ranges={state}
+                />
+              </div>,
+              document.body
+            )}
+          <Input title="Destination" type="text" ref={destinationRef} />
+          <Input title="Budget" type="number" showDollar min={0} ref={budgetRef} />
+        </div>
+        <div className={styles.dayCardContainer}>
+          {Array.from({ length: Math.max(1, totalDays) }).map((_, i) => {
+            const dayIndex = i + 1;
+            const cardTitle = `Day ${String(dayIndex).padStart(2, "0")}`;
+            const defaultDateValue = startDate ? format(addDays(startDate, i), "yyyy-MM-dd") : "";
+            // Get initial data for this day if available
+            const initialDayData = dayEvents[i] || [];
+
+            return (
+              <InputCard
+                key={i} // Note: if date range changes drastically, keys might need to be more stable or reset
+                cardTitle={cardTitle}
+                initialEntries={1}
+                initialData={initialDayData}
+                dateValue={defaultDateValue}
+                onChange={(events) =>
+                  setDayEvents((prev) => ({
                     ...prev,
-                    destination: e.target.value,
+                    [i]: events.map((e) => ({ ...e, date: defaultDateValue })),
                   }))
                 }
               />
-            }
-          />
-          <DetailsItem
-            title="Budget"
-            content={
-              <input
-                type="number"
-                min={0}
-                value={formState.budget}
-                onChange={(e) => handleBudgetChange(e.target.value)}
-                style={{ paddingLeft: "20px" }}
-              />
-            }
-          />
-        </InputCardInDetails>
-        <div className={styles.dayCardContainer}>
-          {formState.days.map((day, dayIndex) => (
-            <DayPlanCard
-              key={day.date || dayIndex}
-              cardTitle={`Day ${String(dayIndex + 1).padStart(2, "0")} - ${
-                day.date
-              }`}
-            >
-              {(day.events && day.events.length > 0
-                ? day.events
-                : [{ time: "", location: "", note: "" }]
-              ).map((event, eventIndex) => {
-                const events = day.events || [];
-                const isLast = eventIndex === events.length - 1;
-                return (
-                  <div key={eventIndex} className={styles.eventBlock}>
-                    <DayPlanCardEvent
-                      date={day.date}
-                      isEditing={true}
-                      time={event.time || ""}
-                      location={event.location || ""}
-                      note={event.note || ""}
-                      onChange={(field, value) =>
-                        handleEventChange(dayIndex, eventIndex, field, value)
-                      }
-                    />
-                    {!isLast && (
-                      <div className={styles.eventDeleteWrapper}>
-                        {(events || []).length > 1 && (
-                          <button
-                            className={styles.removeIconButton}
-                            onClick={() => removeEventRow(dayIndex, eventIndex)}
-                            aria-label="Remove event"
-                          >
-                            <img src={removeIcon} alt="remove" />
-                          </button>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-              <div className={styles.actionsRow}>
-                <button
-                  className={styles.addIconButton}
-                  onClick={() => addEventRow(dayIndex)}
-                  aria-label="Add event"
-                >
-                  <img src={addIcon} alt="add" />
-                </button>
-                {(day.events || []).length > 1 && (
-                  <button
-                    className={styles.removeIconButton}
-                    onClick={() =>
-                      removeEventRow(dayIndex, (day.events || []).length - 1)
-                    }
-                    aria-label="Remove last event"
-                  >
-                    <img src={removeIcon} alt="remove" />
-                  </button>
-                )}
-              </div>
-            </DayPlanCard>
-          ))}
+            );
+          })}
         </div>
         <div className={styles.btnContainer}>
           <Button
             $whiteSmall
             onClick={() => {
-              if (typeof onCancel === "function") return onCancel();
-              navigate(`/plan-detail/${planId}`);
+              if (typeof onClose === "function") onClose();
             }}
           >
             Cancel

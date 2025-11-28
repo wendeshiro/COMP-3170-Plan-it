@@ -54,8 +54,14 @@
   position: absolute;
   left: 20px;
   bottom: 23px;
-  font-size: 22px;
+  font-size: 24px;
   color: #4062bb;
+  font-weight: 600;
+}
+
+.daysCountSmall {
+  font-size: 16px;
+  font-weight: normal;
 }
 
 .detailsSection {

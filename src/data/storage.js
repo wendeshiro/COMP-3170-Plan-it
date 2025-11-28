@@ -1,5 +1,5 @@
 import seedPlans from "./plans.json";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const STORAGE_KEY = "planit.plans";
 
@@ -42,6 +42,13 @@ export function addPlan(plan) {
 export function deletePlansByIds(idSet) {
   const plans = getPlans();
   const next = plans.filter((p) => !idSet.has(p.id)); // keep the original false
+  writeStorage(next);
+  return next;
+}
+
+export function updatePlan(updatedPlan) {
+  const plans = getPlans();
+  const next = plans.map((p) => (p.id === updatedPlan.id ? updatedPlan : p));
   writeStorage(next);
   return next;
 }

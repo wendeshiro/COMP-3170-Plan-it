@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.weatherContainer {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  color: #4062bb;
+  font-size: 18px;
+  gap: 5px;
+}
+
+.weatherInfo {
+  font-size: 18px;
+}
+
+.temperature {
+  margin-left: 8px;
+}
+
+.navContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 230px;
+  justify-content: flex-start;
+}
+
+.navLink {
+  font-size: 20px;
+  text-decoration: none;
+  color: #5d6c90;
+}
+
+.navLinkActive {
+  font-weight: 800;
+  color: #4062bb;
+}

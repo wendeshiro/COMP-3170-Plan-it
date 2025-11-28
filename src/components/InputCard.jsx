@@ -9,16 +9,18 @@ export default function InputCard({
   showAddButton = true,
   style,
   initialEntries = 1,
+  initialData = [],
   dateValue = "",
   onChange,
 }) {
-  const [entries, setEntries] = useState(Array.from({ length: initialEntries }));
+  const count = Math.max(initialEntries, initialData.length || 0);
+  const [entries, setEntries] = useState(Array.from({ length: count }));
   const [values, setValues] = useState(
-    Array.from({ length: initialEntries }, () => ({
-      location: "",
+    Array.from({ length: count }, (_, i) => ({
+      location: initialData[i]?.location || "",
       date: dateValue || "",
-      time: "",
-      note: "",
+      time: initialData[i]?.time || "",
+      note: initialData[i]?.note || "",
     }))
   );
 

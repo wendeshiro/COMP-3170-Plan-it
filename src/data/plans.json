@@ -186,5 +186,148 @@
         ]
       }
     ]
+  },
+  {
+    "id": "p4",
+    "name": "Toronto City Trip",
+    "startDate": "2026-03-15",
+    "endDate": "2026-03-20",
+    "destination": "Canada - Toronto",
+    "budget": 2500,
+    "daysCount": 6,
+    "createdAt": "2025-11-27T00:00:00.000Z",
+    "days": [
+      {
+        "date": "2026-03-15",
+        "events": [
+          {
+            "time": "08:00",
+            "location": "Toronto Airport",
+            "note": "Arrive in Toronto, pick up rental car"
+          },
+          { "time": "11:00", "location": "Hotel Check-in", "note": "Fairmont Royal York" },
+          { "time": "13:00", "location": "Lunch at St. Lawrence Market" },
+          { "time": "15:00", "location": "Distillery District", "note": "Sightseeing and coffee" }
+        ]
+      },
+      {
+        "date": "2026-03-16",
+        "events": [
+          { "time": "08:00", "location": "Breakfast at hotel" },
+          { "time": "09:00", "location": "CN Tower", "note": "Observation deck and EdgeWalk" },
+          { "time": "12:00", "location": "Ripley's Aquarium", "note": "Indoor family activity" },
+          { "time": "14:00", "location": "Harbourfront", "note": "Relax by Lake Ontario" }
+        ]
+      },
+      {
+        "date": "2026-03-17",
+        "events": [
+          { "time": "08:00", "location": "Breakfast at hotel" },
+          { "time": "09:00", "location": "Royal Ontario Museum", "note": "Explore exhibits" },
+          { "time": "12:00", "location": "Lunch in Yorkville" },
+          { "time": "14:00", "location": "Kensington Market", "note": "Shopping and street art" }
+        ]
+      },
+      {
+        "date": "2026-03-18",
+        "events": [
+          { "time": "07:30", "location": "Breakfast" },
+          { "time": "08:30", "location": "Toronto Islands", "note": "Ferry ride and sightseeing" },
+          { "time": "13:00", "location": "Picnic lunch on the islands" },
+          { "time": "15:00", "location": "Return to hotel" }
+        ]
+      },
+      {
+        "date": "2026-03-19",
+        "events": [
+          { "time": "08:00", "location": "Breakfast" },
+          { "time": "09:00", "location": "Casa Loma", "note": "Castle tour and gardens" },
+          { "time": "12:00", "location": "Lunch nearby" },
+          { "time": "14:00", "location": "Shopping at Eaton Centre" }
+        ]
+      },
+      {
+        "date": "2026-03-20",
+        "events": [
+          { "time": "07:30", "location": "Breakfast and check-out" },
+          { "time": "09:00", "location": "Toronto Airport", "note": "Flight back home" },
+          { "time": "11:00", "location": "Airport lounge", "note": "Relax before departure" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "p5",
+    "name": "Paris Romantic Trip",
+    "startDate": "2026-05-10",
+    "endDate": "2026-05-16",
+    "destination": "France - Paris",
+    "budget": 4000,
+    "daysCount": 7,
+    "createdAt": "2025-11-27T00:00:00.000Z",
+    "days": [
+      {
+        "date": "2026-05-10",
+        "events": [
+          { "time": "09:00", "location": "Charles de Gaulle Airport", "note": "Arrive in Paris" },
+          { "time": "11:00", "location": "Hotel Check-in", "note": "Le Meurice Hotel" },
+          { "time": "13:00", "location": "Lunch in Montmartre" },
+          { "time": "15:00", "location": "Sacré-Cœur Basilica", "note": "Panoramic view of Paris" }
+        ]
+      },
+      {
+        "date": "2026-05-11",
+        "events": [
+          { "time": "08:00", "location": "Breakfast at hotel" },
+          { "time": "09:00", "location": "Louvre Museum", "note": "Guided tour of main exhibits" },
+          { "time": "12:00", "location": "Lunch at Le Café Marly" },
+          { "time": "14:00", "location": "Seine River Cruise", "note": "Relaxing sightseeing" }
+        ]
+      },
+      {
+        "date": "2026-05-12",
+        "events": [
+          { "time": "08:00", "location": "Breakfast" },
+          { "time": "09:00", "location": "Eiffel Tower", "note": "Visit top and photos" },
+          { "time": "12:00", "location": "Lunch nearby" },
+          { "time": "14:00", "location": "Trocadéro Gardens", "note": "Relax and take pictures" }
+        ]
+      },
+      {
+        "date": "2026-05-13",
+        "events": [
+          { "time": "08:00", "location": "Breakfast" },
+          { "time": "09:00", "location": "Notre-Dame Cathedral", "note": "Sightseeing" },
+          { "time": "11:00", "location": "Île de la Cité walk", "note": "Scenic stroll" },
+          { "time": "13:00", "location": "Lunch at local bistro" }
+        ]
+      },
+      {
+        "date": "2026-05-14",
+        "events": [
+          { "time": "08:00", "location": "Breakfast" },
+          { "time": "09:00", "location": "Versailles Palace", "note": "Day trip with gardens" },
+          { "time": "12:00", "location": "Lunch near Versailles" },
+          { "time": "16:00", "location": "Return to Paris hotel" }
+        ]
+      },
+      {
+        "date": "2026-05-15",
+        "events": [
+          { "time": "08:00", "location": "Breakfast" },
+          { "time": "09:00", "location": "Champs-Élysées", "note": "Shopping and walking" },
+          { "time": "12:00", "location": "Lunch at Ladurée" },
+          { "time": "14:00", "location": "Arc de Triomphe", "note": "Climb to top view" }
+        ]
+      },
+      {
+        "date": "2026-05-16",
+        "events": [
+          { "time": "07:30", "location": "Breakfast and check-out" },
+          { "time": "09:00", "location": "Charles de Gaulle Airport", "note": "Flight back home" },
+          { "time": "11:00", "location": "Airport lounge", "note": "Relax before departure" }
+        ]
+      }
+    ]
   }
 ]
