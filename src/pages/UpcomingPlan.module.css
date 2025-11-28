@@ -1,7 +1,8 @@
 .upcomingPlan {
   display: grid;
+  /* grid-template-columns: 390px 1fr; */
   grid-template-columns: 390px 1fr;
-  grid-template-rows: 100px 1fr;
+  grid-template-rows: 120px 1fr;
   column-gap: 20px;
   row-gap: 20px;
   padding: 20px 40px 0;
@@ -12,6 +13,32 @@
     grid-template-columns: 330px 1fr;
     column-gap: 10px;
   }
+}
+
+.topHeader {
+  grid-column: 1/3;
+  grid-row: 1/2;
+  display: grid;
+  grid-template-columns: 200px 1fr 300px;
+}
+
+.planItLogo {
+  grid-column: 1/2;
+  justify-self: start;
+  align-self: center;
+  margin-bottom: 0px;
+}
+
+.pageNavBar {
+  grid-column: 2/3;
+  justify-self: center;
+  align-self: center;
+}
+
+.addPlanButton {
+  grid-column: 3/4;
+  justify-self: end;
+  align-self: center;
 }
 
 .dropdownSelect {
@@ -29,21 +56,6 @@
   align-items: center;
   gap: 16px;
   margin-top: 20px;
-}
-
-.planItLogo {
-  grid-column: 1/2;
-  grid-row: 1/2;
-  justify-self: start;
-  align-self: center;
-  margin-bottom: 0px;
-}
-
-.addPlanButton {
-  grid-column: 2/3;
-  grid-row: 1/2;
-  justify-self: end;
-  align-self: center;
 }
 
 .upcomingPlanContainer {

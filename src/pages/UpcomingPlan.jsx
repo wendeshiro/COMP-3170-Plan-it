@@ -6,17 +6,45 @@ import styles from "./UpcomingPlan.module.css";
 import CreatePlanPage from "./CreatePlanPage";
 import EditPlanPage from "./EditPlanPage";
 import PlanDetail from "./PlanDetail";
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { Button } from "../components/Button";
 import { getPlans, deletePlansByIds } from "../data/storage";
+import PageNavBar from "../components/PageNavBar";
 
 export default function UpcomingPlan() {
   // rightView values: 'empty' (default click prompt), 'create' (show create page), 'detail' (show plan details)
   const [rightView, setRightView] = useState("empty");
-  const [selectedFilter, setSelectedFilter] = useState("all");
+  const [selectedFilter, setSelectedFilter] = useState("upcoming");
   const [isSelectMode, setIsSelectMode] = useState(false);
   const [selectedPlanIds, setSelectedPlanIds] = useState(new Set());
   const [selectedPlanId, setSelectedPlanId] = useState(null);
+
+  // Location state
+  const [location, setLocation] = useState(null);
+
+  useEffect(() => {
+    if (!navigator.geolocation) {
+      return;
+    }
+
+    const watchId = navigator.geolocation.watchPosition(
+      (position) => {
+        setLocation(position);
+      },
+      (err) => {
+        console.error(err.message);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      }
+    );
+
+    return () => {
+      navigator.geolocation.clearWatch(watchId);
+    };
+  }, []);
 
   // All plan data object - now as state so we can delete plans
   const [allPlans, setAllPlans] = useState(() => getPlans());
@@ -98,8 +126,16 @@ export default function UpcomingPlan() {
 
   return (
     <div className={styles.upcomingPlan}>
-      <div className={styles.planItLogo}>
-        <img src={logo} alt="Plan It Logo" />
+      <div className={styles.topHeader}>
+        <div className={styles.planItLogo}>
+          <img src={logo} alt="Plan It Logo" />
+        </div>
+        <PageNavBar className={styles.pageNavBar} location={location} />
+        {rightView !== "create" && rightView !== "edit" && (
+          <div className={styles.addPlanButton}>
+            <AddPlan onClick={handleAddPlanClick} />
+          </div>
+        )}
       </div>
 
       <div className={styles.upcomingPlanContainer}>
@@ -135,12 +171,6 @@ export default function UpcomingPlan() {
           </div>
         )}
       </div>
-
-      {rightView !== "create" && rightView !== "edit" && (
-        <div className={styles.addPlanButton}>
-          <AddPlan onClick={handleAddPlanClick} />
-        </div>
-      )}
 
       <div className={styles.rightColumnLarge}>
         {rightView === "create" ? (
