@@ -148,7 +148,7 @@ export default function UpcomingPlan() {
         </div>
         {isSelectMode && (
           <div className={styles.deleteButtonContainer}>
-            <Button redLarge onClick={handleDeleteClick}>
+            <Button $redLarge onClick={handleDeleteClick}>
               Delete
             </Button>
           </div>
