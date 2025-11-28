@@ -116,7 +116,7 @@ export default function PageNavBar({ location }) {
 
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.weatherSection}>
         {hasError ? (
           "No weather data available."
         ) : weatherData ? (
@@ -133,7 +133,7 @@ export default function PageNavBar({ location }) {
             </div>
           </div>
         ) : (
-          "Loading weather..."
+          <p>Loading weather...</p>
         )}
       </div>
       <div className={styles.navContainer}>

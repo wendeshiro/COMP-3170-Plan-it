@@ -25,7 +25,7 @@ export const Button = styled.button`
     `}
 
   ${(props) =>
-    props.redLarge &&
+    props.$redLarge &&
     css`
       width: 12.1875rem;
       height: 3.9375rem;
@@ -88,6 +88,12 @@ export const Button = styled.button`
       font-style: normal;
       font-weight: 400;
       line-height: normal;
+
+      @media (max-width: 960px) {
+        width: 13rem;
+        height: 3.5rem;
+        font-size: 1.25rem;
+      }
     `}
 
         ${(props) =>
