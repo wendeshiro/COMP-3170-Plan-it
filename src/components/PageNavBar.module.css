@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 5px;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
@@ -10,16 +10,16 @@
   @media (max-width: 960px) {
     flex-direction: column;
     height: auto;
-    gap: 20px;
+    gap: 10px;
   }
 }
 
 .weatherContainer {
   display: flex;
   flex-direction: column;
-  font-weight: bold;
+  font-weight: 700;
   color: #4062bb;
-  font-size: 18px;
+  font-size: 20px;
   gap: 5px;
 
   @media (max-width: 960px) {
@@ -29,6 +29,7 @@
 
 .weatherInfo {
   font-size: 18px;
+  font-weight: 500;
 }
 
 .temperature {
@@ -47,8 +48,9 @@
 }
 
 .navLink {
-  font-size: 20px;
+  font-size: 22px;
   text-decoration: none;
+  font-weight: 300;
   color: #5d6c90;
 }
 

@@ -13,8 +13,10 @@ export default function PageNavBar({ location }) {
 
   async function getData(lat, lon) {
     // lat/lon should be strings (toFixed) passed from the caller
-    const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&timezone=auto&past_days=1`;
+    const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_mean&current=temperature_2m,weather_code&timezone=auto&forecast_days=2`;
     const geoUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`;
+    console.log(`Fetching weather from: ${weatherUrl}`);
+    console.log(`Fetching geo data from: ${geoUrl}`);
 
     setHasError(false);
     try {
@@ -109,10 +111,19 @@ export default function PageNavBar({ location }) {
     return { desc: "Unknown", emoji: "❓" };
   }
 
-  // compute current weather code/info (safe)
-  const currentCode =
-    weatherData?.current?.weather_code ?? weatherData?.current?.weathercode ?? null;
+  // compute current weather code/info
+  const currentCode = weatherData?.current?.weather_code ?? null;
   const currentInfo = weatherData ? weatherCodeInfo(currentCode) : null;
+
+  // compute tomorrow weather code/info
+  // daily.weather_code is an array, index 1 is tomorrow (index 0 is today)
+  const tomorrowCode = weatherData?.daily?.weather_code?.[1] ?? null;
+  const tomorrowInfo = weatherData ? weatherCodeInfo(tomorrowCode) : null;
+
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const formatDate = (date) => `${date.getMonth() + 1}/${date.getDate()}`;
 
   return (
     <div className={styles.container}>
@@ -123,10 +134,20 @@ export default function PageNavBar({ location }) {
           <div className={styles.weatherContainer}>
             <div>{cityName || "Unknown"}</div>
             <div className={styles.weatherInfo}>
-              {currentInfo ? currentInfo.emoji : ""} {currentInfo ? currentInfo.desc : "--"}{" "}
+              {formatDate(today)} {currentInfo ? currentInfo.emoji : ""}{" "}
+              {currentInfo ? currentInfo.desc : "--"}
               <span className={styles.temperature}>
                 {typeof weatherData.current?.temperature_2m === "number"
                   ? Math.round(weatherData.current.temperature_2m)
+                  : "--"}
+                °C
+              </span>
+              <br />
+              {formatDate(tomorrow)} {tomorrowInfo ? tomorrowInfo.emoji : ""}{" "}
+              {tomorrowInfo ? tomorrowInfo.desc : "--"}
+              <span className={styles.temperature}>
+                {typeof weatherData.daily?.temperature_2m_mean?.[1] === "number"
+                  ? Math.round(weatherData.daily.temperature_2m_mean[1])
                   : "--"}
                 °C
               </span>
