@@ -14,10 +14,10 @@
     "date-fns": "^4.1.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.3",
-    "react": "^19.2.0",
+    "react": "^19.2.3",
     "react-bootstrap": "^2.10.10",
     "react-date-range": "^2.0.1",
-    "react-dom": "^19.1.1",
+    "react-dom": "^19.2.3",
     "react-router-dom": "^7.9.4",
     "styled-components": "^6.1.19",
     "uuid": "^13.0.0"
